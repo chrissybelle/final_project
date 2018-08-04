@@ -1,0 +1,119 @@
+/* .card-btn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  border: none;
+  bottom: 1%;
+  color: #FFF;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: FontAwesome;
+  outline: 0;
+}
+
+.fa-heart {
+  left: 1%;
+  background: #E53935;
+}
+
+.like::after {
+  content: "\f004";
+}
+
+.fa-bookmark {
+  right: 1%;
+  background: #43A047;
+
+}
+
+.fa-bookmark::after {
+  content: "\f02e";
+}
+
+.like:hover::after, .fa-bookmark:hover::after {
+  animation: iconBounce .57s 1;
+}
+
+@keyframes iconBounce {
+  0% {
+    font-size: 24px;
+  }
+  
+   50% {
+    font-size: 28px;
+  }
+  
+  100% {
+    font-size: 24px;
+  }
+
+} */
+
+
+.card-btn {
+  /* border-radius: 50%; */
+  height: 40px;
+  width: 40px;
+  border: none;
+  bottom: 1px;
+  /* color: #000; */
+  font-size: 30px;
+  cursor: pointer;
+  font-family: FontAwesome;
+  outline: none;
+}
+
+.unliked, .liked {
+  position: absolute;
+  left: 1%;
+  bottom: 2%;
+}
+
+/* .fa-heart::after {
+  content: "\f004";
+} */
+
+.unsaved, .saved {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+}
+
+/* .fa-bookmark::after {
+  content: "\f02e";
+} */
+
+
+.liked {
+  color: pink;
+}
+
+.saved {
+  color: #0099aa;
+}
+
+.unliked, .unsaved {
+  color: gray;
+}
+
+
+
+/* .heartBtn:hover::after, .bookmarkBtn:hover::after {
+  animation: iconBounce .57s 1;
+}
+
+@keyframes iconBounce {
+  0% {
+    font-size: 24px;
+  }
+  
+   50% {
+    font-size: 28px;
+  }
+  
+  100% {
+    font-size: 24px;
+  }
+
+} */

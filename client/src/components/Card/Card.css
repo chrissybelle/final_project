@@ -1,0 +1,122 @@
+.card {
+  background-size: cover;
+  background-position: center;
+  background-clip: content-box;
+  border: 6px solid white;
+  height: 250px;
+  width: 250px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.23);
+  position: relative;
+  margin: 0 auto;
+}
+
+.cardtitle {
+  font-weight: bold;
+  height: auto;
+  width: 250px;
+  border: 6px solid white;
+  box-shadow: 0 0px 0px rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.23);
+  position: relative;
+  margin: 0 auto;
+  margin-top: 15px;
+  background-color: white;
+}
+
+.cardbottom {
+  height: 50px;
+  width: 250px;
+  border: 6px solid white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  position: relative;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.card .fa-spinner {
+  font-size: 180px;
+  position: absolute;
+  left: 25%;
+  top: 25%;
+}
+
+.btn {
+  font-family: FontAwesome;
+}
+
+.ingredientList {
+  font-size: 10px;
+  opacity: 0;
+  color: black;
+  padding-top: 15px;
+
+  /* position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition: 300ms ease-out;
+  transition: 300ms ease-out; */
+}
+
+.ingredientHeader {
+  font-weight: bold;
+}
+
+.ingredientList:hover {
+  opacity: 0.7;
+  overflow: scroll;
+  background-color: white;
+  padding-bottom: 25px;
+  transition:all 0.35s ease;
+  padding-right: 15px;
+/* 
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1); */
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.5);
+  background-size: cover;
+  background-position: center;
+  background-clip: content-box;
+/* 
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition: color 1000ms;
+  transition: color 1000ms; */
+}
+/* 
+.sweep-to-bottom
+  position: relative
+  -webkit-transform: translateZ(0)
+  transform: translateZ(0)
+  -webkit-transition: color 1000ms
+  transition: color 1000ms
+  &:before
+    content: ""
+    position: absolute
+    z-index: -1
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: #2098d1
+    -webkit-transform: scaleY(0)
+    transform: scaleY(0)
+    -webkit-transform-origin: 50% 0%
+    transform-origin: 50% 0%
+    -webkit-transition-property: transform
+    transition-property: transform
+    -webkit-transition: 300ms ease-out
+    transition: 300ms ease-out
+  &:hover:before
+    -webkit-transform: scaleY(1)
+    transform: scaleY(1) */

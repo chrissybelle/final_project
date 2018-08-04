@@ -1,0 +1,21 @@
+.wrapper {
+  padding-top: 50px;
+  background: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px;
+  justify-content: space-around;
+  align-content: flex-start;
+  overflow: auto;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.fa-spinner {
+  font-size: 50px;
+  position: absolute;
+  left: 50%;
+  top: 100px;
+}
+
