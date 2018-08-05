@@ -96,11 +96,11 @@ class EdamamSearch extends React.Component {
 
 
 //GET request from db, should return URL's of results in an array belonging to your user
-    API.searchForLiked()
-    .then(res => {
-      dbSavedResults = res.data;
-    });
-    console.log("dbsavedresults: " + dbSavedResults);
+    // API.searchForLiked()
+    // .then(res => {
+    //   dbSavedResults = res.data;
+    // });
+    // console.log("dbsavedresults: " + dbSavedResults);
 //for loop through resultarray.length
 //if cardLink matches any result in the array then console.log("alreadys saved")
       
