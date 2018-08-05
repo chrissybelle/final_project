@@ -62,6 +62,7 @@ class EdamamSearch extends React.Component {
         })
         .catch(err => console.log(err));
     }
+    this.state.queryString = "";
   };
 
   handleFormSubmitSaved = event => {
@@ -93,7 +94,10 @@ class EdamamSearch extends React.Component {
 
 
 //GET request from db, should return URL's of results in an array belonging to your user
+    API.searchForLiked()
+    .then(res => {
 
+    })
 //for loop through resultarray.length
 //if cardLink matches any result in the array then console.log("alreadys saved")
       
@@ -141,7 +145,7 @@ deleteEdamam = cardName => {
         <Row>
           <Col size="md-3">
               <h1>Search</h1>
-            <form>
+            <form id="searchForm"> 
               <div className="searchForm">
                 <Input
                   value={this.state.queryString}

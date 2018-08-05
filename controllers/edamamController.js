@@ -8,9 +8,7 @@ const edamamFunctions = {
   // finds recipes from db where liked = true and origin = edamam
   findLikedEdamam: function (req, res) {
     db.Recipe
-      .find({ 'user': 'test', 'liked': true, 'origin': 'Edamam' }
-      // , { '_id': 0, 'description': 1 }
-    )
+      .find({ 'user': 'test', 'liked': true, 'origin': 'Edamam' })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

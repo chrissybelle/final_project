@@ -11,6 +11,9 @@ body {
   background-color: #ffe4e1;
 }
 
+.searchForm {
+    margin-top: 50px;
+}
 
 .savedForm {
     margin: 40px 0;
@@ -38,8 +41,8 @@ button:disabled {
 	font-family: FontAwesome;
 	/* content:">>"; */
 	/* position: absolute; */
-	/* top: 11px;
-	left: -50px; */
+	top: 11px;
+	left: -50px;
 	transition: all 200ms ease;
 }
 
