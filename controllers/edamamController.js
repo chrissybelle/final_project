@@ -22,7 +22,7 @@ const edamamFunctions = {
   },
   removeEdamam: function (req, res) {
     db.Recipe
-      .findById({ _id: req.params.id })
+      .findById({ 'name': req.params.name })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -33,4 +33,4 @@ router.get("/api/recipes/search/edamam/liked", edamamFunctions.findLikedEdamam)
 
 router.get("/api/recipes/search/edamam/:name", edamamFunctions.findByEdamam)
 
-router.delete("/api/recipes/edamam/:id", edamamFunctions.removeEdamam)
+router.delete("/api/recipes/edamam/:name", edamamFunctions.removeEdamam)

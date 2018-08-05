@@ -7,9 +7,29 @@ import "./Card.css";
 
 
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      btnlike: false
+    }
+  }
+
+  handleCardBtnClick = (event) => {
+    event.preventDefault();
+    this.setState(prevState => ({
+      btnlike: !prevState.btnlike
+    }
+  // .then(handleBtnClick)
+));
+    console.log("LIKE: " + this.state.btnlike); 
+  }
+
+
 
   render() {
     const { image, recipeName, recipeLink, recipeIngredients, handleBtnClick, like, index } = this.props
+
+
 
     return (
       // fix loading spinner
@@ -44,39 +64,22 @@ class Card extends React.Component {
               // className={ {like} ? "liked" : "heartBtn"}
               className={`heartBtn ${like}`}
               style={{ opacity: image ? 1 : 0 }}
-              onClick={this.props.handleBtnClick}
+              onClick={handleBtnClick}
+              // onClick={this.handleCardBtnClick}
  
             >
               <i 
-                className={`fas fa-heart ${like}`} 
+                className={`fas fa-heart ${like} ${this.state.btnlike}`} 
                 data-value={recipeLink}
                 data-like={like} 
                 data-image={image}
                 data-recipename={recipeName}
                 data-recipelink={recipeLink}
                 data-recipeingredients={recipeIngredients}
-
+                data-liketracker={this.state.btnlike}
+                onClick={this.handleCardBtnClick}
               ></i>
             </CardBtn>
-
-            {/* <CardBtn
-              // className={ {save} ? "saved" : "bookmarkBtn"}
-              className={`bookmarkBtn ${save}`}
-              style={{ opacity: image ? 1 : 0 }}
-              onClick={this.props.handleBtnClick}
-              save={save}
-            >
-              <i 
-                className={`fas fa-bookmark ${save}`} 
-                data-value="bookmark"
-                data-save={save} 
-                data-image={image}
-                data-recipename={recipeName}
-                data-recipelink={recipeLink}
-                data-recipeingredients={recipeIngredients}
-
-              ></i>
-            </CardBtn> */}
 
 
 
@@ -97,6 +100,7 @@ Card.propTypes = {
   // showCard: PropTypes.bool,
   handleBtnClick: PropTypes.func,
   like: PropTypes.string
+  //likeTracker: PropTypes.string
 }
 
 export default Card;

@@ -10,12 +10,10 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 
 
 let searchResults = [];
-// let compareFromEdamam = [];
-let dbResults = [];
-let likedArray = [];
-// let compareFromDb = [];
-// let displayResults = [];
-// let cardID = [];
+
+// let dbResults = [];
+// let likedArray = [];
+
 
 // S E A R C H  E D A M A M   A P I
 
@@ -28,9 +26,10 @@ class EdamamSearch extends React.Component {
       recipeID: [],
       // recipeName: "",
       // image: "",
-      // recipeLink: "",
+      // recipeLink: "", 
       showCard: false,
-      like: [],
+      like: false,
+      // likeTracker: "",
       // save: false,
       // dbID: "",
       recipeSearchRes: []
@@ -38,19 +37,10 @@ class EdamamSearch extends React.Component {
     this.handleBtnClick = this.handleBtnClick.bind(this);
   }
 
-  // When the component mounts, load featured recipe
+  // When the component mounts, load saved recipes
   // componentDidMount() {
   //   this.loadEdamamRecipes();
   // }
-
-  // Loads FEATURED RECIPE ******* need to fix
-  // loadRecipes = () => {
-  //   API.getOneRecipe()
-  //     .then(res =>
-  //       this.setState({ recipes: res.data, name: "", ingredients: "", description: "", origin:"", labels:""  })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
 
 
 
@@ -75,50 +65,6 @@ class EdamamSearch extends React.Component {
           
           searchResults = res.data.hits;
 
-          //stores URL of recipes into array
-          for (var i=0; i<res.data.hits.length; i++) {
-            likedArray.push(false);
-          }
-          console.log(likedArray);
-
-          //console.log("Edamam Results Array" + compareFromEdamam);
-        
-          //searches our db for Edamam recipes that have already been liked
-          API.searchForLiked()
-          .then(res => {
-
-            dbResults = res.data;
-
-            //stores URL of results into array
-            // for (var i=0; i<res.data.length; i++) {
-            //   compareFromDb.push(res.data[i].description);
-            // }
-
-            // console.log("Liked Recipes:" + compareFromDb);
-            // console.log("searchresults" + searchResults);
-            // console.log('dbresults' + dbResults);
-
-            // let pushed = false;
-
-            //check if Edamam results have been saved in our db already, if so then display "liked" version
-            // for (var i=0; i<compareFromEdamam; i++) {
-            //   for (var j=0; j<compareFromDb; j++) {
-            //     if (compareFromEdamam[i] === compareFromDb[j]) {
-            //       if (pushed === false) {
-            //         displayResults.push(dbResults[j]);
-            //         pushed = true;
-            //       }
-
-            //     } 
-            //   }
-            // }
-            
-
-            // console.log("final display results:" + displayResults);
-          });
-
-
-          
 
           this.setState({ 
             showCard: true
@@ -140,20 +86,24 @@ class EdamamSearch extends React.Component {
     const cardImage = event.target.attributes.getNamedItem("data-image").value;
     const cardIngredients = event.target.attributes.getNamedItem("data-recipeingredients").value;
     const cardLike = event.target.attributes.getNamedItem("data-like").value;
+    const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
     //const cardID = event.target.attributes.getNamedItem("data-value").value;
-    console.log(`${cardLink}, 
-    ${cardName}, 
-    ${cardIngredients}, 
-    ${cardLike}`);
+    console.log(`like triggered, info will be posted to db: (BTNLIKE)
+    ${cardLikeTracker},
+    `);
 
-    //mark recipe as "liked"
-      this.setState(prevState => ({
-        like: !prevState.like
-      }));
+
+//GET request from db, should return URL's of results in an array belonging to your user
+
+//for loop through resultarray.length
+//if cardLink matches any result in the array then console.log("alreadys saved")
+
+
       
       console.log(this.state.like); 
 
-      if (cardLike === "unliked" ) {
+      //chck if recipe has been liked already, if not then save recipe to db
+      if (cardLikeTracker && this.state.like === false) {
         API.saveEdamam({
           user: "test",
           name: cardName,
@@ -164,9 +114,18 @@ class EdamamSearch extends React.Component {
           liked: true,
           sharable: true
       });
+      console.log("recipe saved");
+      //if recipe has already been liked, then onClick again will delete the recipe
     } else if (cardLike === "liked") {
         this.deleteEdamam(cardName);
+        console.log("recipe deleted");
     }
+
+        //toggle recipe "liked" status
+        this.setState(prevState => ({
+          like: !prevState.like
+        }));
+        console.log(this.state.like); 
 
   };
 
@@ -203,6 +162,12 @@ deleteEdamam = cardName => {
               >
                 Search!
               </FormBtn>
+
+              {/* <FormBtn
+                onClick={this.handleFormSubmitSaved}
+              >
+                View Saved Recipes
+              </FormBtn> */}
             </form>
           </Col>
           <Col size="md-9">
@@ -216,20 +181,12 @@ deleteEdamam = cardName => {
                 recipeLink={results.recipe.url}
                 recipeIngredients={results.recipe.ingredientLines}
                 handleBtnClick={this.handleBtnClick}
-                // like={this.state.like ? "liked" : "unliked"}
+                likeTracker={this.state.like ? results.recipe.url : ""}
+                like={this.state.like ? "liked" : "unliked"}
                 // save={this.state.save ? "saved" : "unsaved"}
                 recipeID={index}
               />
             ))}
-
-            {/* {likedArray.map((results, index) => (
-              <CardBtn
-                key={index}
-                handleBtnClick={this.handleBtnClick}
-                like={results}
-              />
-            ))} */}
-
           </Wrapper>
           </Col>
         </Row>

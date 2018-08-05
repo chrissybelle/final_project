@@ -85,7 +85,7 @@
 } */
 
 
-.liked {
+.true {
   color: pink;
 }
 
@@ -93,9 +93,9 @@
   color: #0099aa;
 }
 
-.unliked, .unsaved {
+/* .unliked, .unsaved {
   color: gray;
-}
+} */
 
 
 
