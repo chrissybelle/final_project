@@ -59,7 +59,7 @@ class Card extends React.Component {
 
           <div className="cardbottom">
 
-          { {marker} ?
+          { marker === "true" ?
 
             <CardBtn
               // className={ {like} ? "liked" : "heartBtn"}
@@ -103,7 +103,7 @@ Card.propTypes = {
   // showCard: PropTypes.bool,
   handleBtnClick: PropTypes.func,
   like: PropTypes.string,
-  marker: PropTypes.bool
+  marker: PropTypes.string
   //likeTracker: PropTypes.string
 }
 

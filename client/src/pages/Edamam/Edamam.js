@@ -185,6 +185,7 @@ deleteEdamam = cardName => {
                 like={this.state.like ? "liked" : "unliked"}
                 // save={this.state.save ? "saved" : "unsaved"}
                 recipeID={index}
+                marker="true"
               />
             ))
             :
@@ -195,7 +196,7 @@ deleteEdamam = cardName => {
                 recipeName={results.name}
                 recipeLink={results.recipelink}
                 recipeIngredients={results.ingredients}
-                marker={false}
+                marker="false"
               />
             ))
           }
