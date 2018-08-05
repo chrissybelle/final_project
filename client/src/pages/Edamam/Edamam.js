@@ -1,18 +1,21 @@
 import React from "react";
 // import Jumbotron from "../../components/Jumbotron";
 import Card from "../../components/Card";
+import CardBtn from "../../components/CardBtn";
 import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
 
+
 let searchResults = [];
-let compareFromEdamam = [];
+// let compareFromEdamam = [];
 let dbResults = [];
-let compareFromDb = [];
-let displayResults = [];
-let cardID = [];
+let likedArray = [];
+// let compareFromDb = [];
+// let displayResults = [];
+// let cardID = [];
 
 // S E A R C H  E D A M A M   A P I
 
@@ -27,9 +30,9 @@ class EdamamSearch extends React.Component {
       // image: "",
       // recipeLink: "",
       showCard: false,
-      like: false,
-      save: false,
-      dbID: "",
+      like: [],
+      // save: false,
+      // dbID: "",
       recipeSearchRes: []
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
@@ -74,10 +77,11 @@ class EdamamSearch extends React.Component {
 
           //stores URL of recipes into array
           for (var i=0; i<res.data.hits.length; i++) {
-            compareFromEdamam.push(res.data.hits[i].recipe.url);
+            likedArray.push(false);
           }
+          console.log(likedArray);
 
-          console.log("Edamam Results Array" + compareFromEdamam);
+          //console.log("Edamam Results Array" + compareFromEdamam);
         
           //searches our db for Edamam recipes that have already been liked
           API.searchForLiked()
@@ -86,31 +90,31 @@ class EdamamSearch extends React.Component {
             dbResults = res.data;
 
             //stores URL of results into array
-            for (var i=0; i<res.data.length; i++) {
-              compareFromDb.push(res.data[i].description);
-            }
+            // for (var i=0; i<res.data.length; i++) {
+            //   compareFromDb.push(res.data[i].description);
+            // }
 
-            console.log("Liked Recipes:" + compareFromDb);
-            console.log("searchresults" + searchResults);
-            console.log('dbresults' + dbResults);
+            // console.log("Liked Recipes:" + compareFromDb);
+            // console.log("searchresults" + searchResults);
+            // console.log('dbresults' + dbResults);
 
-            let pushed = false;
+            // let pushed = false;
 
             //check if Edamam results have been saved in our db already, if so then display "liked" version
-            for (var i=0; i<compareFromEdamam; i++) {
-              for (var j=0; j<compareFromDb; j++) {
-                if (compareFromEdamam[i] === compareFromDb[j]) {
-                  if (pushed === false) {
-                    displayResults.push(dbResults[j]);
-                    pushed = true;
-                  }
+            // for (var i=0; i<compareFromEdamam; i++) {
+            //   for (var j=0; j<compareFromDb; j++) {
+            //     if (compareFromEdamam[i] === compareFromDb[j]) {
+            //       if (pushed === false) {
+            //         displayResults.push(dbResults[j]);
+            //         pushed = true;
+            //       }
 
-                } 
-              }
-            }
+            //     } 
+            //   }
+            // }
             
 
-            console.log("final display results:" + displayResults);
+            // console.log("final display results:" + displayResults);
           });
 
 
@@ -136,6 +140,7 @@ class EdamamSearch extends React.Component {
     const cardImage = event.target.attributes.getNamedItem("data-image").value;
     const cardIngredients = event.target.attributes.getNamedItem("data-recipeingredients").value;
     const cardLike = event.target.attributes.getNamedItem("data-like").value;
+    //const cardID = event.target.attributes.getNamedItem("data-value").value;
     console.log(`${cardLink}, 
     ${cardName}, 
     ${cardIngredients}, 
@@ -148,7 +153,7 @@ class EdamamSearch extends React.Component {
       
       console.log(this.state.like); 
 
-      if (cardLike === "unliked") {
+      if (cardLike === "unliked" ) {
         API.saveEdamam({
           user: "test",
           name: cardName,
@@ -211,11 +216,20 @@ deleteEdamam = cardName => {
                 recipeLink={results.recipe.url}
                 recipeIngredients={results.recipe.ingredientLines}
                 handleBtnClick={this.handleBtnClick}
-                like={this.state.like ? "liked" : "unliked"}
-                save={this.state.save ? "saved" : "unsaved"}
+                // like={this.state.like ? "liked" : "unliked"}
+                // save={this.state.save ? "saved" : "unsaved"}
                 recipeID={index}
               />
             ))}
+
+            {/* {likedArray.map((results, index) => (
+              <CardBtn
+                key={index}
+                handleBtnClick={this.handleBtnClick}
+                like={results}
+              />
+            ))} */}
+
           </Wrapper>
           </Col>
         </Row>

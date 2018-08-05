@@ -9,7 +9,7 @@ import "./Card.css";
 class Card extends React.Component {
 
   render() {
-    const { image, recipeName, recipeLink, recipeIngredients, handleBtnClick, like, save, index } = this.props
+    const { image, recipeName, recipeLink, recipeIngredients, handleBtnClick, like, index } = this.props
 
     return (
       // fix loading spinner
@@ -49,7 +49,7 @@ class Card extends React.Component {
             >
               <i 
                 className={`fas fa-heart ${like}`} 
-                data-value="heart" 
+                data-value={recipeLink}
                 data-like={like} 
                 data-image={image}
                 data-recipename={recipeName}
@@ -59,7 +59,7 @@ class Card extends React.Component {
               ></i>
             </CardBtn>
 
-            <CardBtn
+            {/* <CardBtn
               // className={ {save} ? "saved" : "bookmarkBtn"}
               className={`bookmarkBtn ${save}`}
               style={{ opacity: image ? 1 : 0 }}
@@ -76,7 +76,7 @@ class Card extends React.Component {
                 data-recipeingredients={recipeIngredients}
 
               ></i>
-            </CardBtn>
+            </CardBtn> */}
 
 
 
@@ -96,8 +96,7 @@ Card.propTypes = {
   recipeIngredients: PropTypes.array,
   // showCard: PropTypes.bool,
   handleBtnClick: PropTypes.func,
-  like: PropTypes.string,
-  save: PropTypes.string
+  like: PropTypes.string
 }
 
 export default Card;
