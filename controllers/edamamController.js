@@ -6,9 +6,10 @@ const edamamFunctions = {
 
 // E D A M A M - R E L A T E D 
   //saves recipes to db
-  saveEdamam: function (req, res) {
+  create: function (req, res) {
       db.Edamam
       .create(req.body)
+      .then(console.log("controller hit"))
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -35,12 +36,11 @@ const edamamFunctions = {
 }
 
 
+router.post("/api/edamam/", edamamFunctions.create)
 
 router.get("/api/edamam/liked", edamamFunctions.findLikedEdamam)
 
-router.post("/api/edamam/", edamamFunctions.saveEdamam)
-
-router.get("/api/recipes/search/edamam/:name", edamamFunctions.findByEdamam)
+router.get("/api/edamam/search/:name", edamamFunctions.findByEdamam)
 
 router.delete("/api/edamam/:name", edamamFunctions.removeEdamam)
 

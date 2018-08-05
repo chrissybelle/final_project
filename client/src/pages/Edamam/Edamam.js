@@ -154,7 +154,7 @@ deleteEdamam = cardName => {
                   value={this.state.queryString}
                   onChange={this.handleInputChange}
                   name="queryString"
-                  placeholder="Search"
+                  placeholder="Enter Search Term Here"
                 />
                 <button
                   className="searchbtn"

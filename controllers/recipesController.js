@@ -46,30 +46,6 @@ const recipeFunctions = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-
-  // E D A M A M - R E L A T E D 
-  // finds recipes from db where liked = true and origin = edamam
-  findLikedEdamam: function (req, res) {
-    db.Recipe
-      .find({ 'liked': true, 'origin': 'Edamam' }
-      // , { '_id': 0, 'description': 1 }
-    )
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findByEdamam: function (req, res) {
-    db.Recipe
-      .find({ 'name': req.params.name })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  removeEdamam: function (req, res) {
-    db.Recipe
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
   }
 }
 
@@ -87,11 +63,52 @@ router.get("/api/recipes/user/:user", recipeFunctions.findByUser)
 
 router.patch("/api/recipes/:id", recipeFunctions.update)
 
-router.get("/api/recipes/search/edamam/liked", recipeFunctions.findLikedEdamam)
 
-router.get("/api/recipes/search/edamam/:name", recipeFunctions.findByEdamam)
 
-router.delete("/api/recipes/edamam/:id", recipeFunctions.removeEdamam)
+
+  // E D A M A M - R E L A T E D 
+const edamamFunctions = {
+
+    //saves recipes to db
+    create: function (req, res) {
+        db.Edamam
+        .create(req.body)
+        .then(console.log("controller hit"))
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+    // finds recipes saved by user
+    findLikedEdamam: function (req, res) {
+      db.Edamam
+        .find({ 'user': 'test' })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+    findByEdamam: function (req, res) {
+      db.Edamam
+        .find({ 'user': 'test', 'name': req.params.name })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+    removeEdamam: function (req, res) {
+      db.Edamam
+        .findById({ 'name': req.params.name })
+        .then(dbModel => dbModel.remove())
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    }
+  }
+  
+  
+  router.post("/api/recipes/edamam/", edamamFunctions.create)
+  
+  router.get("/api/recipes/edamam/liked", edamamFunctions.findLikedEdamam)
+  
+  router.get("/api/recipes/edamam/search/:name", edamamFunctions.findByEdamam)
+  
+  router.delete("/api/recipes/edamam/:name", edamamFunctions.removeEdamam)
+  
+
 
 // If no API routes are hit, send the React app
 router.use(function (req, res) {

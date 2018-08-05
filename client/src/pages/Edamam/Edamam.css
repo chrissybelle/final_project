@@ -32,7 +32,7 @@ button:hover {
 }
 
 button:disabled {
-    opacity: 0.6;
+    background-color: #fff0f5;
     box-shadow: none;
   }
 
