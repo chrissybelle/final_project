@@ -170,7 +170,12 @@ deleteEdamam = cardName => {
             </form>
           </Col>
           <Col size="md-9">
-          <h1>Search Results</h1>
+          { !this.state.submitBtn ? 
+            <h1>Search Results</h1>
+            :
+            <h1>Your Saved Recipes </h1>
+          }
+
           <div className="resultsWrapper" showCard={this.state.showCard}>
           { !this.state.submitBtn ?
           displayResults.map((results, index) => (
