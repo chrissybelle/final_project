@@ -64,6 +64,10 @@
   outline: none;
 }
 
+.card-btn:hover {
+  box-shadow: none;
+}
+
 .unliked, .liked {
   position: absolute;
   left: 1%;
@@ -74,11 +78,11 @@
   content: "\f004";
 } */
 
-.unsaved, .saved {
+/* .unsaved, .saved {
   position: absolute;
   right: 1%;
   bottom: 1%;
-}
+} */
 
 /* .fa-bookmark::after {
   content: "\f02e";
@@ -86,11 +90,11 @@
 
 
 .true {
-  color: pink;
+  color: #ffe4e1;
 }
 
-.saved {
-  color: #0099aa;
+.false {
+  color: #cccccc;
 }
 
 /* .unliked, .unsaved {

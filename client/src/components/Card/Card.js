@@ -19,7 +19,6 @@ class Card extends React.Component {
     this.setState(prevState => ({
       btnlike: !prevState.btnlike
     }
-  // .then(handleBtnClick)
 ));
     console.log("LIKE: " + this.state.btnlike); 
   }
@@ -27,7 +26,7 @@ class Card extends React.Component {
 
 
   render() {
-    const { image, recipeName, recipeLink, recipeIngredients, handleBtnClick, like, index } = this.props
+    const { image, recipeName, recipeLink, recipeIngredients, handleBtnClick, like, index, marker } = this.props
 
 
 
@@ -60,6 +59,8 @@ class Card extends React.Component {
 
           <div className="cardbottom">
 
+          { {marker} ?
+
             <CardBtn
               // className={ {like} ? "liked" : "heartBtn"}
               className={`heartBtn ${like}`}
@@ -80,7 +81,9 @@ class Card extends React.Component {
                 onClick={this.handleCardBtnClick}
               ></i>
             </CardBtn>
-
+            :
+            "" 
+          }
 
 
           </div>
@@ -99,7 +102,8 @@ Card.propTypes = {
   recipeIngredients: PropTypes.array,
   // showCard: PropTypes.bool,
   handleBtnClick: PropTypes.func,
-  like: PropTypes.string
+  like: PropTypes.string,
+  marker: PropTypes.bool
   //likeTracker: PropTypes.string
 }
 

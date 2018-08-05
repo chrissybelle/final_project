@@ -6,14 +6,11 @@ import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import "./Edamam.css";
 
-
-
-let searchResults = [];
-
-// let dbResults = [];
-// let likedArray = [];
-
+// let searchResults = [];
+// let dbSavedResults = [];
+let displayResults = [];
 
 // S E A R C H  E D A M A M   A P I
 
@@ -21,18 +18,12 @@ class EdamamSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // recipeResults: [],
       queryString: "",
       recipeID: [],
-      // recipeName: "",
-      // image: "",
-      // recipeLink: "", 
       showCard: false,
       like: false,
-      // likeTracker: "",
-      // save: false,
-      // dbID: "",
-      recipeSearchRes: []
+      submitBtn: false,
+      displayRecipes: []
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
   }
@@ -62,22 +53,30 @@ class EdamamSearch extends React.Component {
       //makes AJAX call to Edamam API
       API.searchEdamam(this.state.queryString)
         .then(res => {
-          
-          searchResults = res.data.hits;
-
-
+          displayResults = res.data.hits;
           this.setState({ 
-            showCard: true
+            showCard: true,
+            displayRecipes: displayResults,
+            submitBtn: false
            })
-        }
-      
-        )
+        })
         .catch(err => console.log(err));
-
     }
   };
 
-  //FIXXXXXXX :(
+  handleFormSubmitSaved = event => {
+    event.preventDefault();
+    API.searchForLiked()
+    .then(res => {
+      displayResults = res.data;
+      this.setState({
+        displayRecipes: displayResults,
+        submitBtn: true
+      })
+    })
+  };
+
+  // Saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
     // Get the data from  the clicked button
@@ -97,8 +96,6 @@ class EdamamSearch extends React.Component {
 
 //for loop through resultarray.length
 //if cardLink matches any result in the array then console.log("alreadys saved")
-
-
       
       console.log(this.state.like); 
 
@@ -129,16 +126,13 @@ class EdamamSearch extends React.Component {
 
   };
 
-  
+// removes recipe from db
 deleteEdamam = cardName => {
   console.log("test");
   API.findEdamamID(cardName)
         .then(res => {
           API.deleteEdamam(res.data[0]._id)
-          // console.log(res.data[0]._id)
       }).catch(err => console.log(err));
-        // console.log("DB id:" + this.state.dbID);
-        // API.deleteEdamam(this.state.dbID);
   };
  
   render() {
@@ -146,34 +140,40 @@ deleteEdamam = cardName => {
       <Container fluid>
         <Row>
           <Col size="md-3">
-            {/* <Jumbotron> */}
               <h1>Search</h1>
-            {/* </Jumbotron> */}
             <form>
-              <Input
-                value={this.state.queryString}
-                onChange={this.handleInputChange}
-                name="queryString"
-                placeholder="Search"
-              />
-              <FormBtn
-                disabled={!(this.state.queryString)}
-                onClick={this.handleFormSubmit}
-              >
-                Search!
-              </FormBtn>
-
-              {/* <FormBtn
+              <div className="searchForm">
+                <Input
+                  value={this.state.queryString}
+                  onChange={this.handleInputChange}
+                  name="queryString"
+                  placeholder="Search"
+                />
+                <button
+                  className="searchbtn"
+                  disabled={!(this.state.queryString)}
+                  onClick={this.handleFormSubmit}
+                >
+                <i className="fas fa-utensiles"/>
+                  Search!
+                </button>
+              </div>
+              <div className="savedForm">
+              <button
+                className="savedbtn"
                 onClick={this.handleFormSubmitSaved}
               >
+              <i className="fas fa-utensils"/>
                 View Saved Recipes
-              </FormBtn> */}
+              </button>
+              </div>
             </form>
           </Col>
           <Col size="md-9">
           <h1>Search Results</h1>
-          <Wrapper showCard={this.state.showCard}>
-            {searchResults.map((results, index) => (
+          <div className="resultsWrapper" showCard={this.state.showCard}>
+          { !this.state.submitBtn ?
+          displayResults.map((results, index) => (
               <Card 
                 key={results.recipe.shareAs}
                 image={results.recipe.image} 
@@ -186,8 +186,20 @@ deleteEdamam = cardName => {
                 // save={this.state.save ? "saved" : "unsaved"}
                 recipeID={index}
               />
-            ))}
-          </Wrapper>
+            ))
+            :
+            displayResults.map((results, index) => (
+              <Card 
+                key={index}
+                image={results.image} 
+                recipeName={results.name}
+                recipeLink={results.recipelink}
+                recipeIngredients={results.ingredients}
+                marker={false}
+              />
+            ))
+          }
+          </div>
           </Col>
         </Row>
       </Container>

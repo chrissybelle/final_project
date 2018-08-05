@@ -1,0 +1,66 @@
+body {
+    background-image: url("https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bdd3a5305d7913b82929130ae81fef6&auto=format&fit=crop&w=1510&q=80");
+    background-repeat: no-repeat;
+}
+
+.searchbtn {
+  background-color: #ffe4e1;
+}
+
+.savedbtn {
+  background-color: #ffe4e1;
+}
+
+
+.savedForm {
+    margin: 40px 0;
+}
+
+button {
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px 35px;  
+    overflow:hidden;
+    border: 2px solid #fff0f5;
+}
+
+button:hover {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.15);
+}
+
+button:disabled {
+    opacity: 0.6;
+    box-shadow: none;
+  }
+
+
+.savedbtn:before {
+	font-family: FontAwesome;
+	/* content:">>"; */
+	/* position: absolute; */
+	/* top: 11px;
+	left: -50px; */
+	transition: all 200ms ease;
+}
+
+button:hover:before {
+	left: 7px;
+}
+
+.fa-utensils {
+    opacity: 0;
+}
+
+.fa-utensils:hover {
+    opacity: 1;
+    font-size: 20px;
+    transition: all 200ms ease;
+}
+
+.resultsWrapper {
+    height: 450px;
+    overflow: scroll;
+    padding: 20px;
+    margin-top: 100px;
+
+}
