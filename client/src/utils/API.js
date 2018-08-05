@@ -10,10 +10,8 @@ export default {
     return axios.get("/api/recipes/user/" + user);
   },
    //Search recipes from user by keyword 
-
    getRecipesUserQuery: function (user, queryString) {
     return axios.get("/api/recipes/search/" + user, {params:{searchQuery:queryString}});
-
   },
   // Deletes the recipe with the given id
   deleteRecipes: function (id) {
@@ -37,13 +35,14 @@ export default {
     return axios.get("https://api.edamam.com/search?q=" + queryString + "&app_id=a5ee7877&app_key=385a3e92adcbf250abaab079e4e705f5&to=12");
   },
   // Searches our db for liked recipes from Edamam db
-  // (see "findLikedEdamam" in recipesController)
+  // (see "findLikedEdamam" in edamamController)
   searchForLiked: function () {
-    return axios.get("/api/recipes/search/edamam/liked")
+    return axios.get("/api/edamam/liked")
   },
   // Saves Edamam API recipes to our db
+  // 9see "savedEdamam" in edmamaController
   saveEdamam: function (recipeData) {
-    return axios.post("/api/recipes", recipeData);
+    return axios.post("/api/edamam/", recipeData);
   },
   // Searches our db for previously saved Edamam recipes -***** need to add user
   findEdamamID: function (cardName) {
@@ -53,6 +52,6 @@ export default {
   },
   // Deletes saved Edamam recipe from our db
   deleteEdamam: function (cardName) {
-    return axios.delete("/api/recipes/edamam/" + cardName);
+    return axios.delete("/api/edamam/" + cardName);
   }
 };

@@ -9,7 +9,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./Edamam.css";
 
 // let searchResults = [];
-// let dbSavedResults = [];
+let dbSavedResults = [];
 let displayResults = [];
 
 // S E A R C H  E D A M A M   A P I
@@ -62,9 +62,11 @@ class EdamamSearch extends React.Component {
         })
         .catch(err => console.log(err));
     }
+    //clears out search term in input box
     this.state.queryString = "";
   };
 
+  //to pull list of your saved recipes
   handleFormSubmitSaved = event => {
     event.preventDefault();
     API.searchForLiked()
@@ -96,8 +98,9 @@ class EdamamSearch extends React.Component {
 //GET request from db, should return URL's of results in an array belonging to your user
     API.searchForLiked()
     .then(res => {
-
-    })
+      dbSavedResults = res.data;
+    });
+    console.log("dbsavedresults: " + dbSavedResults);
 //for loop through resultarray.length
 //if cardLink matches any result in the array then console.log("alreadys saved")
       
@@ -109,11 +112,9 @@ class EdamamSearch extends React.Component {
           user: "test",
           name: cardName,
           ingredients: cardIngredients,
-          description: cardLink,
-          image: cardImage,
-          origin: "Edamam",
-          liked: true,
-          sharable: true
+          recipelink: cardLink,
+          image: cardImage
+          // liked: true,
       });
       console.log("recipe saved");
       //if recipe has already been liked, then onClick again will delete the recipe
@@ -133,8 +134,10 @@ class EdamamSearch extends React.Component {
 // removes recipe from db
 deleteEdamam = cardName => {
   console.log("test");
+  // finds specific recipe in our db
   API.findEdamamID(cardName)
         .then(res => {
+          // deletes that recipe from our db
           API.deleteEdamam(res.data[0]._id)
       }).catch(err => console.log(err));
   };
@@ -180,7 +183,7 @@ deleteEdamam = cardName => {
             <h1>Your Saved Recipes </h1>
           }
 
-          <div className="resultsWrapper" showCard={this.state.showCard}>
+          <div className="resultsWrapper" showcard={this.state.showCard}>
           { !this.state.submitBtn ?
           displayResults.map((results, index) => (
               <Card 
@@ -201,6 +204,7 @@ deleteEdamam = cardName => {
             displayResults.map((results, index) => (
               <Card 
                 key={index}
+                user="test"
                 image={results.image} 
                 recipeName={results.name}
                 recipeLink={results.recipelink}

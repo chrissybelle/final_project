@@ -5,21 +5,28 @@ const db = require("../models");
 const edamamFunctions = {
 
 // E D A M A M - R E L A T E D 
-  // finds recipes from db where liked = true and origin = edamam
+  //saves recipes to db
+  saveEdamam: function (req, res) {
+      db.Edamam
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  // finds recipes saved by user
   findLikedEdamam: function (req, res) {
-    db.Recipe
-      .find({ 'user': 'test', 'liked': true, 'origin': 'Edamam' })
+    db.Edamam
+      .find({ 'user': 'test' })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByEdamam: function (req, res) {
-    db.Recipe
-      .find({ 'name': req.params.name })
+    db.Edamam
+      .find({ 'user': 'test', 'name': req.params.name })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   removeEdamam: function (req, res) {
-    db.Recipe
+    db.Edamam
       .findById({ 'name': req.params.name })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
@@ -27,8 +34,20 @@ const edamamFunctions = {
   }
 }
 
-router.get("/api/recipes/search/edamam/liked", edamamFunctions.findLikedEdamam)
+
+
+router.get("/api/edamam/liked", edamamFunctions.findLikedEdamam)
+
+router.post("/api/edamam/", edamamFunctions.saveEdamam)
 
 router.get("/api/recipes/search/edamam/:name", edamamFunctions.findByEdamam)
 
-router.delete("/api/recipes/edamam/:name", edamamFunctions.removeEdamam)
+router.delete("/api/edamam/:name", edamamFunctions.removeEdamam)
+
+// If no API routes are hit, send the React app
+router.use(function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
+  
+  module.exports = router;
+  

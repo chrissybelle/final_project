@@ -1,14 +1,13 @@
 .card-btn {
   /* border-radius: 50%; */
-  height: 40px;
-  width: 40px;
+  height: auto;
+  width: auto;
   border: none;
   bottom: 1px;
   /* color: #000; */
   font-size: 30px;
   cursor: pointer;
   font-family: FontAwesome;
-  outline: none;
 }
 
 .card-btn:hover {

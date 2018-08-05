@@ -18,8 +18,8 @@ const Nav = () =>
           <li  className={window.location.pathname === "/home" ? "active nav-item" : "nav-item"} >
             <a className="nav-link" href="/home">Home</a>
           </li>
-          <li className={window.location.pathname === "/edamamrecipes" ? "active nav-item" : "nav-item"}>
-            <a className="nav-link" href="/edamamrecipes">Search</a>
+          <li className={window.location.pathname === "/edamam" ? "active nav-item" : "nav-item"}>
+            <a className="nav-link" href="/edamam">Search</a>
           </li>
           <li className={window.location.pathname === "/your-recipes" ? "active nav-item" : "nav-item"}>
             <a className="nav-link" href="/your-recipes">Your Recipes</a>
