@@ -1,0 +1,10 @@
+#foodImage{
+    position: absolute;
+    right: 15px;
+    height: 300px;
+    width: 300px;
+}
+
+ul{
+    position:relative;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import "./Details.css";
 
 
 class Detail extends React.Component {
@@ -11,7 +12,8 @@ class Detail extends React.Component {
       recipe: {},
       isUpdate: false,
       ingredientsList: [],
-      descriptionList : []
+      descriptionList : [],
+      i: 0
     };
   }
   // When this component mounts, grab the book with the _id of this.props.match.params.id
@@ -64,8 +66,24 @@ class Detail extends React.Component {
           <article>
             <ul>
               <h1 >Ingredients</h1>
+              <span>
+          <img id = "foodImage" src={this.state.recipe.image}  height="42" width="42"/>
+           </span> 
               {this.state.ingredientsList.map(ingredients => (
                 <li> {ingredients} </li> 
+              ))}
+            </ul>
+          </article>
+          
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-10 md-offset-1">
+          <article>
+            <ul>
+              <h1 >Ingredients</h1>
+              {this.state.descriptionList.map(description => (
+                <p> {description} </p> 
               ))}
             </ul>
           </article>
@@ -73,14 +91,10 @@ class Detail extends React.Component {
       </Row>
       <Row>
         <Col size="md-10 md-offset-1">
-          <article>
-            <h1>Description</h1>
-            <p>
-            {this.state.descriptionList.map(description => (
-                <p> {description} </p> 
-            ))}
-            </p>
-          </article>
+        <p>
+          Origin: {this.state.recipe.origin}
+          </p>
+      
         </Col>
       </Row>
       <Row>
@@ -120,6 +134,18 @@ class Detail extends React.Component {
               name="description"
               defaultValue={this.state.recipe.description}
             />
+             <Input
+                    value={this.state.image}
+                    onChange={this.handleInputChange}
+                    name="image"
+                    placeholder={this.state.recipe.image}
+                />
+                <Input
+                    value={this.state.origin}
+                    onChange={this.handleInputChange}
+                    name="origin"
+                    placeholder={this.state.recipe.origin}
+                />
             <button onClick={() => this.handleUpdate(false)}>Cancel</button>
             <FormBtn
               disabled={!(this.state.recipe.name && this.state.recipe.ingredients && this.state.recipe.description)}
