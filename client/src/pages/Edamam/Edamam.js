@@ -148,7 +148,6 @@ deleteEdamam = cardName => {
  
   render() {
     return (
-      <body className = "background2">
       <Container fluid>
         <Row>
           <Col size="md-3">
@@ -222,7 +221,6 @@ deleteEdamam = cardName => {
           </Col>
         </Row>
       </Container>
-      </body>
     );
   }
 }
