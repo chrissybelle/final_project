@@ -4,7 +4,7 @@ import { Col, Row } from "../../components/Grid";
 import SavedCards from "../../components/SavedCards";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./YourRecipes.css";
-
+import "../Edamam/Edamam.css";
 
 import {withMultiContext} from "with-context";
 import { AppContext } from '../../components/AppProvider/AppProvider.js';
@@ -243,6 +243,7 @@ class TestPage extends React.Component {
     render() {
         if (this.state.isUpdate)
             return (
+                
                 <Row>
                     {this.createRecipe()}
                     {this.favRecipe()}

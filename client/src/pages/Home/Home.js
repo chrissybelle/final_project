@@ -59,7 +59,7 @@ class Home extends React.Component {
         return (
             <div>
                 <Jumbotron />
-                <div className="Background">
+                <body className="Background">
                     <Row>
                         <Col size="md-12">
                             <div className="homeStyle">Our featured dishes!
@@ -84,7 +84,7 @@ class Home extends React.Component {
                             <Col size="md-2">
                             </Col>
                         </Row>
-                </div>
+                </body>
                 </div>
 
                 );
