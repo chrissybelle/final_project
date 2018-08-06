@@ -5,6 +5,7 @@ import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
 import { Col, Row } from "../../components/Grid";
 // import Background from "../../components/Background";
+import "./Home.css";
 
 
 // import { Col, Row, Container } from "../../components/Grid";
@@ -58,30 +59,36 @@ class Home extends React.Component {
         return (
             <div>
                 <Jumbotron />
-                <div class="Background">
+                <div className="Background">
                     <Row>
-                        <Col size="md-2">
-                        </Col>
-                        <Col size="md-8">
-                            <Wrapper showCard={this.state.showCard}>
-                                {cardID.map((results, index) => (
-                                    <CardHome
-                                        image={results.recipe.image}
-                                        recipeName={results.recipe.label}
-                                        recipeLink={results.recipe.url}
-                                        recipeIngredients={results.recipe.ingredientLines}
-                                    />
-                                ))}
-                            </Wrapper>
-                        </Col>
-                        <Col size="md-2">
+                        <Col size="md-12">
+                            <div className="homeStyle">Our featured dishes!
+                        </div>
                         </Col>
                     </Row>
+                        <Row>
+                            <Col size="md-2">
+                            </Col>
+                            <Col size="md-8">
+                                <Wrapper showCard={this.state.showCard}>
+                                    {cardID.map((results, index) => (
+                                        <CardHome
+                                            image={results.recipe.image}
+                                            recipeName={results.recipe.label}
+                                            recipeLink={results.recipe.url}
+                                            recipeIngredients={results.recipe.ingredientLines}
+                                        />
+                                    ))}
+                                </Wrapper>
+                            </Col>
+                            <Col size="md-2">
+                            </Col>
+                        </Row>
                 </div>
-            </div>
+                </div>
 
-        );
-    }
-}
-
+                );
+            }
+        }
+        
 export default Home;

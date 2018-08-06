@@ -1,0 +1,13 @@
+.homeStyle{
+    margin-left: 600px;
+    margin-top: 60px;
+    font-size: 36px;
+    font-weight: bolder;
+}
+
+.Background{
+    background-image: url("../../imgs/marble.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
