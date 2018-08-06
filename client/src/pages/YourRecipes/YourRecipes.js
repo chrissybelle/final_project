@@ -6,7 +6,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./YourRecipes.css";
 import "../Edamam/Edamam.css";
 
-import {withMultiContext} from "with-context";
+import { withMultiContext } from "with-context";
 import { AppContext } from '../../components/AppProvider/AppProvider.js';
 
 class TestPage extends React.Component {
@@ -57,7 +57,7 @@ class TestPage extends React.Component {
     loadUserRecipes = (user) => {
         API.getRecipesUser(user)
             .then(res =>
-                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", origin: "", labels: "", image:"" })
+                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", origin: "", labels: "", image: "" })
             )
             .catch(err => console.log(err));
     }
@@ -127,8 +127,8 @@ class TestPage extends React.Component {
     buttonCreate = () => (
         <Col size="md-5 sm-12">
             <div className="createrecipe">
-            <button className="btn btn-success" onClick={() => this.handleUpdate(true)}>Create Recipe</button>
-        </div>
+                <button className="btn btn-success" onClick={() => this.handleUpdate(true)}>Create Recipe</button>
+            </div>
         </Col>
 
     )
@@ -155,7 +155,7 @@ class TestPage extends React.Component {
                     name="description"
                     placeholder="Description (required)"
                 />
-                 <Input
+                <Input
                     value={this.state.image}
                     onChange={this.handleInputChange}
                     name="image"
@@ -185,56 +185,58 @@ class TestPage extends React.Component {
             <Row>
                 <Col size="md-4 sm-12">
                     <form>
-                    <div className="favrecipe">
-                        <Input
-                            value={this.state.queryString}
-                            onChange={this.handleInputChange}
-                            name="queryString"
-                            placeholder="Search"
-                        />
+                        <div className="favrecipe">
+                            <Input
+                                value={this.state.queryString}
+                                onChange={this.handleInputChange}
+                                name="queryString"
+                                placeholder="Search"
+                            />
                         </div>
                         <div className="favrecipebtn">
-                        <FormBtn
-                            disabled={!(this.state.queryString)}
-                            onClick={this.handleSearchSubmit}
-                        >
-                            Search!
+                            <FormBtn
+                                disabled={!(this.state.queryString)}
+                                onClick={this.handleSearchSubmit}
+                            >
+                                Search!
               </FormBtn>
-              </div>
+                        </div>
                     </form>
                 </Col>
             </Row>
-            {this.state.searchRecipes.length ? (
+            <div className="savedRecipes">
+                {this.state.searchRecipes.length ? (
                     <Col size="md-12 sm-12">
                         {this.state.searchRecipes.map(searchRecipes => {
                             return (
                                 <SavedCards key={searchRecipes._id}
                                     recipeLink={"/recipes/" + searchRecipes._id}
                                     recipeName={searchRecipes.name}
-                                    image = {searchRecipes.image}
-                                    recipeIngredients = {searchRecipes.ingredients}
+                                    image={searchRecipes.image}
+                                    recipeIngredients={searchRecipes.ingredients}
                                     deleteRecipe={() => this.deleteRecipes(searchRecipes._id)}>
                                 </SavedCards>
 
                             );
                         })}
                     </Col>
-            ) : (
+                ) : (
                         <Col size="md-12 sm-12">
                             {this.state.recipes.map(recipes => {
                                 return (
                                     <SavedCards key={recipes._id}
                                         recipeLink={"/recipes/" + recipes._id}
                                         recipeName={recipes.name}
-                                        image = {recipes.image}
-                                        recipeIngredients = {recipes.ingredients}
+                                        image={recipes.image}
+                                        recipeIngredients={recipes.ingredients}
                                         deleteRecipe={() => this.deleteRecipes(recipes._id)}>
                                     </SavedCards>
 
                                 );
                             })}
                         </Col>
-                )}
+                    )}
+            </div>
         </div>
 
     )
@@ -243,20 +245,20 @@ class TestPage extends React.Component {
     render() {
         if (this.state.isUpdate)
             return (
-                
+
                 <Row>
                     {this.createRecipe()}
                     {this.favRecipe()}
                 </Row>
             )
         else if (this.props.appContext.user)
-        return(
-            <Row>
-                {this.buttonCreate()}
-                {this.favRecipe()}
-            </Row>
-        );
-        else return(
+            return (
+                <Row>
+                    {this.buttonCreate()}
+                    {this.favRecipe()}
+                </Row>
+            );
+        else return (
             <div> Please Sign In!</div>
         )
     }

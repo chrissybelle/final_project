@@ -12,10 +12,25 @@ body {
   }
 
   .favrecipe {
-      margin-top: 100px;
+      margin: 100px;
   }
 
   .favrecipebtn {
       margin-right: -100px;
       margin-top: -55px;
+  }
+
+  .savedRecipes{
+    padding: 25px;
+    background:rgba(29, 29, 29, 0.2);
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 20px;
+    justify-content: space-around;
+    align-content: flex-start;
+    overflow: hidden;
+    width: auto;
+    /* margin: 0 auto; */
+    margin: 50px;
   }
