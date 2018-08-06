@@ -92,7 +92,7 @@ const edamamFunctions = {
     },
     removeEdamam: function (req, res) {
       db.Edamam
-        .findById({ 'name': req.params.name })
+        .findById({ '_id': req.params.name })
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));

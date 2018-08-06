@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const recipesController = require("./controllers/recipesController");
-const edamamController = require("./controllers/edamamController");
+const recipesController = require("./controllers/recipesController.js");
+const edamamController = require("./controllers/edamamController.js");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -15,8 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static("client/build"));
 // Add routes, both API and view
 app.use(recipesController);
-app.use(edamamController);
-
+// app.use(edamamController);
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB

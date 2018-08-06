@@ -113,10 +113,14 @@ class EdamamSearch extends React.Component {
           name: cardName,
           ingredients: cardIngredients,
           recipelink: cardLink,
-          image: cardImage
-          // liked: true,
-      });
-      console.log("recipe saved");
+          image: cardImage,
+          // liked: false,
+      }).then(res => {
+        
+        console.log("recipe saved");
+
+    })
+    .catch(err => console.log(err));
       //if recipe has already been liked, then onClick again will delete the recipe
     } else if (cardLike === "liked") {
         this.deleteEdamam(cardName);

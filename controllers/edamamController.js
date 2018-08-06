@@ -36,7 +36,7 @@ const edamamFunctions = {
 }
 
 
-router.post("/api/edamam/", edamamFunctions.create)
+router.post("/api/edamam", edamamFunctions.create)
 
 router.get("/api/edamam/liked", edamamFunctions.findLikedEdamam)
 
