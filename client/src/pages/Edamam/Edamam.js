@@ -162,7 +162,7 @@ deleteEdamam = cardName => {
                   disabled={!(this.state.queryString)}
                   onClick={this.handleFormSubmit}
                 >
-                <i className="fas fa-utensiles"/>
+                <i className="fas fa-utensils"/>
                   Search!
                 </button>
               </div>
