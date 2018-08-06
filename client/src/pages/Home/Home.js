@@ -3,15 +3,16 @@ import Jumbotron from "../../components/Jumbotron"
 import CardHome from "../../components/CardGeneric";
 import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import { Col, Row } from "../../components/Grid";
+// import Background from "../../components/Background";
 
 
 // import { Col, Row, Container } from "../../components/Grid";
 let searchResults = [];
 let cardID = [];
 
-const options = ["cookies", "brownies", "pizza", "chicken wings", "turkey","pasta"]
-let rand = Math.floor(Math.random() * 6) + 1  
+const options = ["cookies", "brownies", "pizza", "chicken wings", "turkey", "pasta"]
+let rand = Math.floor(Math.random() * 6) + 1
 let searchQuery = options[rand]
 
 
@@ -57,11 +58,11 @@ class Home extends React.Component {
         return (
             <div>
                 <Jumbotron />
-                <Container fluid>
-
+                <div class="Background">
                     <Row>
-
-                        <Col size="md-9">
+                        <Col size="md-2">
+                        </Col>
+                        <Col size="md-8">
                             <Wrapper showCard={this.state.showCard}>
                                 {cardID.map((results, index) => (
                                     <CardHome
@@ -73,8 +74,10 @@ class Home extends React.Component {
                                 ))}
                             </Wrapper>
                         </Col>
+                        <Col size="md-2">
+                        </Col>
                     </Row>
-                </Container>
+                </div>
             </div>
 
         );
