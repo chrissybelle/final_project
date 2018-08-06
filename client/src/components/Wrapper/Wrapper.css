@@ -1,15 +1,17 @@
 .wrapper {
-  padding-top: 50px;
-  background: #ffffff;
-  height: 100%;
+  padding: 50px;
+  background:rgba(29, 29, 29, 0.2);
+  height: auto;
   display: flex;
   flex-flow: row wrap;
   padding: 20px;
   justify-content: space-around;
   align-content: flex-start;
-  overflow: auto;
+  overflow: hidden;;
   width: 90%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin: 100px;
+
 }
 
 .fa-spinner {
