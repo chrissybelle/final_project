@@ -187,7 +187,6 @@ class EdamamSearch extends React.Component {
 
   render() {
     return (
-      <body className="background2">
         <Container fluid>
           <Row>
             <Col size="md-3">
@@ -261,7 +260,6 @@ class EdamamSearch extends React.Component {
             </Col>
           </Row>
         </Container>
-      </body>
     );
   }
 }

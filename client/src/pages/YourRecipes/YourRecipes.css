@@ -13,6 +13,8 @@ body {
 
   .favrecipe {
       margin: 100px;
+      float: right;
+      clear: both;
   }
 
   .favrecipebtn {
