@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import { Col, Row } from "../../components/Grid";
 import SavedCards from "../../components/SavedCards";
 import { Input, TextArea } from "../../components/Form";
 import "./YourRecipes.css";
@@ -182,57 +182,59 @@ class TestPage extends React.Component {
 
 
     favRecipe = () => (
-            <div>
-                    <Col size="md-6 sm-12">
-                        <form className="favRecipe">
-                                <Input
-                                    value={this.state.queryString}
-                                    onChange={this.handleInputChange}
-                                    name="queryString"
-                                    placeholder="Enter Search Term Here"
-                                />
-                            <button className="favrecipebtn"
-                                disabled={!(this.state.queryString)}
-                                onClick={this.handleSearchSubmit}
-                            >
-                                Search!
+        <div>
+            <Col size="md-6 sm-12">
+                <form id="searchForm">
+                    <div className="searchForm">
+                        <Input
+                            value={this.state.queryString}
+                            onChange={this.handleInputChange}
+                            name="queryString"
+                            placeholder="Enter Search Term Here"
+                        />
+                        <button className="favrecipebtn"
+                            disabled={!(this.state.queryString)}
+                            onClick={this.handleSearchSubmit}
+                        >
+                            Search!
                         </button>
-                        </form>
+                    </div>
+                </form>
+            </Col>
+            <div className="savedRecipes">
+                {this.state.searchRecipes.length ? (
+                    <Col size="md-12 sm-12">
+                        {this.state.searchRecipes.map(searchRecipes => {
+                            return (
+                                <SavedCards key={searchRecipes._id}
+                                    recipeLink={"/recipes/" + searchRecipes._id}
+                                    recipeName={searchRecipes.name}
+                                    image={searchRecipes.image}
+                                    recipeIngredients={searchRecipes.ingredients}
+                                    deleteRecipe={() => this.deleteRecipes(searchRecipes._id)}>
+                                </SavedCards>
+
+                            );
+                        })}
                     </Col>
-                <div className="savedRecipes">
-                    {this.state.searchRecipes.length ? (
+                ) : (
                         <Col size="md-12 sm-12">
-                            {this.state.searchRecipes.map(searchRecipes => {
+                            {this.state.recipes.map(recipes => {
                                 return (
-                                    <SavedCards key={searchRecipes._id}
-                                        recipeLink={"/recipes/" + searchRecipes._id}
-                                        recipeName={searchRecipes.name}
-                                        image={searchRecipes.image}
-                                        recipeIngredients={searchRecipes.ingredients}
-                                        deleteRecipe={() => this.deleteRecipes(searchRecipes._id)}>
+                                    <SavedCards key={recipes._id}
+                                        recipeLink={"/recipes/" + recipes._id}
+                                        recipeName={recipes.name}
+                                        image={recipes.image}
+                                        recipeIngredients={recipes.ingredients}
+                                        deleteRecipe={() => this.deleteRecipes(recipes._id)}>
                                     </SavedCards>
 
                                 );
                             })}
                         </Col>
-                    ) : (
-                            <Col size="md-12 sm-12">
-                                {this.state.recipes.map(recipes => {
-                                    return (
-                                        <SavedCards key={recipes._id}
-                                            recipeLink={"/recipes/" + recipes._id}
-                                            recipeName={recipes.name}
-                                            image={recipes.image}
-                                            recipeIngredients={recipes.ingredients}
-                                            deleteRecipe={() => this.deleteRecipes(recipes._id)}>
-                                        </SavedCards>
-
-                                    );
-                                })}
-                            </Col>
-                        )}
-                </div>
+                    )}
             </div>
+        </div>
     )
 
 

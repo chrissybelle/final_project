@@ -24,21 +24,17 @@ body {
     margin: 20px;
   }
 
-  .favrecipe {
-      margin-top: -250px;
-      width: 100px;
-      /* float: right;
-      clear: both; */
-  }
-
   .favrecipebtn {
       background-color: #fad185;
       width: 200px;
+      float: left;
+      clear: both;
   }
 
   .searchForm {
     margin-top: 50px;
-    width: 100px;
+    margin-left: 200px;
+    width: 200px;
 }
 
   .savedRecipes{
