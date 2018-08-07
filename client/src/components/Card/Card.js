@@ -98,7 +98,7 @@ class Card extends React.Component {
 Card.propTypes = {
   image: PropTypes.string,
   recipeName: PropTypes.string,
-  recipeLink: PropTypes.array,
+  recipeLink: PropTypes.string,
   recipeIngredients: PropTypes.array,
   // showCard: PropTypes.bool,
   handleBtnClick: PropTypes.func,

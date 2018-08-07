@@ -7,6 +7,8 @@ import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import { withMultiContext } from "with-context";
+import { AppContext } from '../../components/AppProvider/AppProvider.js';
 import "./Edamam.css";
 
 
@@ -27,7 +29,8 @@ class EdamamSearch extends React.Component {
       like: false,
       submitBtn: false,
       displayRecipes: [],
-      refresh: []
+      refresh: [],
+      user: null
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
   }
@@ -37,7 +40,14 @@ class EdamamSearch extends React.Component {
   //   this.loadEdamamRecipes();
   // }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('recipes receiving user', nextProps.appContext.user);
+    if (nextProps.appContext.user) {
+        this.setState({ user: nextProps.appContext.user });
 
+    }
+
+}
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -60,7 +70,7 @@ class EdamamSearch extends React.Component {
           searchResults = res.data.hits;
         })
         .then(
-          API.findEdamamUser("test")
+          API.findEdamamUser(this.state.user)
             .then(res => {
               dbSavedResults = res.data;
             })
@@ -154,9 +164,10 @@ class EdamamSearch extends React.Component {
 
 
   //to pull list of your saved recipes
-  handleFormSubmitSaved = event => {
+  handleFormSubmitSaved = (event, user) => {
     event.preventDefault();
-    API.searchForLiked()
+    user = this.state.user;
+    API.searchForLiked(user)
       .then(res => {
         uniqueResults = res.data;
         this.setState({
@@ -176,6 +187,7 @@ class EdamamSearch extends React.Component {
     const cardIngredients = event.target.attributes.getNamedItem("data-recipeingredients").value;
     const cardLike = event.target.attributes.getNamedItem("data-like").value;
     const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
+    const user = this.state.user
     //const cardID = event.target.attributes.getNamedItem("data-value").value;
     // console.log(`like triggered, info will be posted to db: (BTNLIKE)
     // ${cardLikeTracker}, ${cardLike}
@@ -196,7 +208,7 @@ class EdamamSearch extends React.Component {
 
 
     // searches db if recipe has aleady been saved
-    API.findOneEdamam(cardName)
+    API.findOneEdamam(cardName, user)
       .then(res => {
         console.log(res.data);
 
@@ -212,7 +224,7 @@ class EdamamSearch extends React.Component {
         } else if (res) {
           console.log("saving recipe");
           API.saveEdamam({
-            user: "test",
+            user: user,
             name: cardName,
             ingredients: cardIngredients,
             recipelink: cardLink,
@@ -342,7 +354,7 @@ class EdamamSearch extends React.Component {
                   uniqueResults.map((results, index) => (
                     <Card
                       key={index}
-                      user="test"
+                      user={this.state.user}
                       image={results.image}
                       recipeName={results.name}
                       recipeLink={results.recipelink}
@@ -363,4 +375,4 @@ class EdamamSearch extends React.Component {
   }
 }
 
-export default EdamamSearch;
+export default withMultiContext({ appContext: AppContext })(EdamamSearch);

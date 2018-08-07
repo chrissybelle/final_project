@@ -80,13 +80,13 @@ const edamamFunctions = {
     // finds recipes saved by user
     findLikedEdamam: function (req, res) {
       db.Edamam
-        .find({ 'user': 'test' })
+        .find({ 'user': req.query.loggedUser })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
     findOneEdamam: function (req, res) {
       db.Edamam
-        .findOne({ 'user': 'test', 'name': req.params.name })
+        .findOne({ 'user': req.query.loggedUser, 'name': req.params.name })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },

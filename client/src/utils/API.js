@@ -41,13 +41,13 @@ export default {
   },
   // Searches our db for liked recipes from Edamam db - used for "View Saved Recipes"
   // see "findLikedEdamam" in edamamController
-  searchForLiked: function () {
-    return axios.get("/api/recipes/edamam/liked")
+  searchForLiked: function (user) {
+    return axios.get("/api/recipes/edamam/liked", { params: { loggedUser: user } })
   },
   // Used to search our db to see if clicked recipe has already been saved
   // see "findOneEdamam" in edamamController
-  findOneEdamam(name) {
-    return axios.get("/api/recipes/edamam/search/" + name)
+  findOneEdamam(name, user) {
+    return axios.get("/api/recipes/edamam/search/" + name, { params: { loggedUser: user } })
   },
   // Deletes saved Edamam recipe from our db
   // see "removeEdamam" in edamamController
