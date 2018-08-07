@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
-import { Col, Row } from "../../components/Grid";
+import { Col, Row, Container } from "../../components/Grid";
 import SavedCards from "../../components/SavedCards";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./YourRecipes.css";
@@ -125,17 +125,19 @@ class TestPage extends React.Component {
 
 
     buttonCreate = () => (
-        <Col size="md-5 sm-12">
+        <Container fluid>
+        <Col size="md-4 sm-12">
             <div className="createrecipe">
-                <button className="btn btn-success" onClick={() => this.handleUpdate(true)}>Create Recipe</button>
+                <button className="createbtn" onClick={() => this.handleUpdate(true)}> <i className="fas fa-utensils"/> Create Recipe</button>
             </div>
         </Col>
+        </Container>
 
     )
 
 
     createRecipe = () => (
-        <Col size="md-5 sm-12">
+        <Col size="md-6 sm-12">
             <form>
                 <Input
                     value={this.state.name}
@@ -167,11 +169,11 @@ class TestPage extends React.Component {
                     name="origin"
                     placeholder="Origin"
                 />
-                <button className="btn btn-success" onClick={() => this.handleUpdate(false)}>Cancel</button>
+                <button className="cancelbtn" onClick={() => this.handleUpdate(false)}>Cancel</button>
                 <FormBtn
                     disabled={!(this.state.name && this.state.ingredients && this.state.description)}
-                    onClick={this.handleFormSubmit}>
-                    Submit Recipe
+                    onClick={this.handleFormSubmit}><button className="submitbtn">
+                    Submit Recipe </button>
                      </FormBtn>
 
             </form>
@@ -181,9 +183,9 @@ class TestPage extends React.Component {
 
 
     favRecipe = () => (
-        <div className="col-md-7 col-sm-12">
+        <div className="col-md-6 col-sm-12">
             <Row>
-                <Col size="md-4 sm-12">
+                <Col size="md-6 sm-12">
                     <form>
                         <div className="favrecipe">
                             <Input
@@ -197,7 +199,7 @@ class TestPage extends React.Component {
                             <FormBtn
                                 disabled={!(this.state.queryString)}
                                 onClick={this.handleSearchSubmit}
-                            >
+                            > 
                                 Search!
               </FormBtn>
                         </div>
