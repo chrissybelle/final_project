@@ -40,7 +40,7 @@ body {
     background-color: #e09b6a;
   }
 
-  .submitrecipe{
+  .submitbtn{
     background-color: #fad185;
   }
 
@@ -57,6 +57,23 @@ body {
     font-size: 20px;
     transition: all 200ms ease;
 }
+
+button {
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px 35px;  
+    overflow:hidden;
+    border: 2px solid #fad185;
+}
+
+button:hover {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.15);
+}
+
+button:disabled {
+    background-color: #fff2da;
+    box-shadow: none;
+  }
 
   /* Edamam Css
 

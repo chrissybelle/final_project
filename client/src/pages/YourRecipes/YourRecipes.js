@@ -170,10 +170,10 @@ class TestPage extends React.Component {
                     placeholder="Origin"
                 />
                 <button className="cancelbtn" onClick={() => this.handleUpdate(false)}>Cancel</button>
-                <FormBtn className="submitrecipe"
+                <FormBtn
                     disabled={!(this.state.name && this.state.ingredients && this.state.description)}
-                    onClick={this.handleFormSubmit}>
-                    Submit Recipe
+                    onClick={this.handleFormSubmit}><button className="submitbtn">
+                    Submit Recipe </button>
                      </FormBtn>
 
             </form>
