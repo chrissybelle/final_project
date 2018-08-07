@@ -1,6 +1,6 @@
 .homeStyle{
-    margin-left: 600px;
-    margin-top: 60px;
+    margin-left: 500px;
+    margin-top: 100px;
     font-size: 36px;
     font-weight: bolder;
 }
@@ -11,4 +11,11 @@
     background-position: center;
     background-size: 100% 100%;
     overflow: auto;
+    margin-top: -5px;
+}
+
+.wrapper{
+    margin-top: 15px;
+    padding: 0px;
+    position: center;
 }

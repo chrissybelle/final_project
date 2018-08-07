@@ -3,13 +3,14 @@ import "./Jumbotron.css";
 
 class Jumbotron extends React.Component {
 
-  render () {
+  render() {
 
     return (
-      <div className="jumbotron jumbotron-fluid" id="image">
-    </div>
-      );
-    }
+      <div className="jumbotron jumbotron-fluid" id="image">                <p className="homeStyle">Our Featured Dishes!
+      </p>
+      </div>
+    );
+  }
 
 }
 
