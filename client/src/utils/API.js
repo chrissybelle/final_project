@@ -44,6 +44,9 @@ export default {
   searchForLiked: function () {
     return axios.get("/api/recipes/edamam/liked")
   },
+  findOneEdamam(name) {
+    return axios.get("/api/recipes/edamam/search/" + name)
+  },
   // Searches our db for previously saved Edamam recipes -***** need to add user
   findEdamamID: function (cardName) {
     // console.log(cardLink);

@@ -54,11 +54,11 @@ class EdamamSearch extends React.Component {
       API.searchEdamam(this.state.queryString)
         .then(res => {
           displayResults = res.data.hits;
-          this.setState({ 
+          this.setState({
             showCard: true,
             displayRecipes: displayResults,
             submitBtn: false
-           })
+          })
         })
         .catch(err => console.log(err));
     }
@@ -70,13 +70,13 @@ class EdamamSearch extends React.Component {
   handleFormSubmitSaved = event => {
     event.preventDefault();
     API.searchForLiked()
-    .then(res => {
-      displayResults = res.data;
-      this.setState({
-        displayRecipes: displayResults,
-        submitBtn: true
+      .then(res => {
+        displayResults = res.data;
+        this.setState({
+          displayRecipes: displayResults,
+          submitBtn: true
+        })
       })
-    })
   };
 
   // Saves recipes to db
@@ -91,137 +91,176 @@ class EdamamSearch extends React.Component {
     const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
     //const cardID = event.target.attributes.getNamedItem("data-value").value;
     console.log(`like triggered, info will be posted to db: (BTNLIKE)
-    ${cardLikeTracker},
+    ${cardLikeTracker}, ${cardLike}
     `);
 
 
-//GET request from db, should return URL's of results in an array belonging to your user
+    //GET request from db, should return URL's of results in an array belonging to your user
     // API.searchForLiked()
     // .then(res => {
     //   dbSavedResults = res.data;
     // });
     // console.log("dbsavedresults: " + dbSavedResults);
-//for loop through resultarray.length
-//if cardLink matches any result in the array then console.log("alreadys saved")
-      
-      console.log(this.state.like); 
+    //for loop through resultarray.length
+    //if cardLink matches any result in the array then console.log("alreadys saved")
 
-      //chck if recipe has been liked already, if not then save recipe to db
-      if (cardLikeTracker && this.state.like === false) {
-        API.saveEdamam({
-          user: "test",
-          name: cardName,
-          ingredients: cardIngredients,
-          recipelink: cardLink,
-          image: cardImage,
-          // liked: false,
-      }).then(res => {
-        
-        console.log("recipe saved");
+    console.log(this.state.like);
+    //searches db if recipe has aleady been saved
+    API.findOneEdamam(cardName)
+      .then(res => {
+        console.log(res.data);
+        if (res.data !== null) {
 
-    })
-    .catch(err => console.log(err));
-      //if recipe has already been liked, then onClick again will delete the recipe
-    } else if (cardLike === "liked") {
-        this.deleteEdamam(cardName);
-        console.log("recipe deleted");
-    }
+          this.deleteEdamam(cardName);
+          console.log("recipe deleted");
 
-        //toggle recipe "liked" status
-        this.setState(prevState => ({
-          like: !prevState.like
-        }));
-        console.log(this.state.like); 
 
+
+        } else if (res) {
+          console.log("saving recipe");
+          API.saveEdamam({
+            user: "test",
+            name: cardName,
+            ingredients: cardIngredients,
+            recipelink: cardLink,
+            image: cardImage,
+            liked: true,
+          }).then(res => {
+            //locate recipe that was saved
+            console.log("recipe saved");
+
+            //then update liked status of recipe in db
+            // .then
+
+          })
+
+        }
+      })
+  }
+
+  //chck if recipe has been liked already, if not then save recipe to db
+  // if (cardLikeTracker) {
+  // API.saveEdamam({
+  //   user: "test",
+  //   name: cardName,
+  //   ingredients: cardIngredients,
+  //   recipelink: cardLink,
+  //   image: cardImage,
+  //   liked: true,
+  // }).then(res => {
+  //   //locate recipe that was saved
+  //   console.log("recipe saved");
+
+  //     //then update liked status of recipe in db
+  //     // .then
+
+  // })
+  // .catch(err => console.log(err));
+  //if recipe has already been liked, then onClick again will delete the recipe
+  // } else if (!cardLikeTracker) {
+  //   this.deleteEdamam(cardName);
+  //   console.log("recipe deleted");
+  // }
+
+  //toggle recipe "liked" status
+  //   this.setState(prevState => ({
+  //     like: !prevState.like
+  //   }));
+  //   console.log(this.state.like);
+
+  // };
+
+
+  // removes recipe from db
+  deleteEdamam = cardName => {
+    // console.log("recipe deleted");
+    // // finds specific recipe in our db
+    // API.findOneEdamam(cardName)
+    //   .then(res => {
+    //     // deletes that recipe from our db
+    //     console.log("!!!!" + res.data)
+        API.deleteEdamam(cardName)
+      // })
+      .catch(err => console.log(err));
   };
 
-// removes recipe from db
-deleteEdamam = cardName => {
-  console.log("test");
-  // finds specific recipe in our db
-  API.findEdamamID(cardName)
-        .then(res => {
-          // deletes that recipe from our db
-          API.deleteEdamam(res.data[0]._id)
-      }).catch(err => console.log(err));
-  };
- 
+
   render() {
     return (
-      <body className = "background2">
-      <Container fluid>
-        <Row>
-          <Col size="md-3">
+      <body className="background2">
+        <Container fluid>
+          <Row>
+            <Col size="md-3">
               <h1>Search</h1>
-            <form id="searchForm"> 
-              <div className="searchForm">
-                <Input
-                  value={this.state.queryString}
-                  onChange={this.handleInputChange}
-                  name="queryString"
-                  placeholder="Enter Search Term Here"
-                />
-                <button
-                  className="searchbtn"
-                  disabled={!(this.state.queryString)}
-                  onClick={this.handleFormSubmit}
-                >
-                <i className="fas fa-utensils"/>
-                  Search!
+              <form id="searchForm">
+                <div className="searchForm">
+                  <Input
+                    value={this.state.queryString}
+                    onChange={this.handleInputChange}
+                    name="queryString"
+                    placeholder="Enter Search Term Here"
+                  />
+                  <button
+                    className="searchbtn"
+                    disabled={!(this.state.queryString)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    <i className="fas fa-utensils" />
+                    Search!
                 </button>
-              </div>
-              <div className="savedForm">
-              <button
-                className="savedbtn"
-                onClick={this.handleFormSubmitSaved}
-              >
-              <i className="fas fa-utensils"/>
-                View Saved Recipes
+                </div>
+                <div className="savedForm">
+                  <button
+                    className="savedbtn"
+                    onClick={this.handleFormSubmitSaved}
+                  >
+                    <i className="fas fa-utensils" />
+                    View Saved Recipes
               </button>
-              </div>
-            </form>
-          </Col>
-          <Col size="md-9">
-          { !this.state.submitBtn ? 
-            <h1>Search Results</h1>
-            :
-            <h1>Your Saved Recipes </h1>
-          }
+                </div>
+              </form>
+            </Col>
+            <Col size="md-9">
+              {!this.state.submitBtn ?
+                <h1>Search Results</h1>
+                :
+                <h1>Your Saved Recipes </h1>
+              }
 
-          <div className="resultsWrapper" showcard={this.state.showCard}>
-          { !this.state.submitBtn ?
-          displayResults.map((results, index) => (
-              <Card 
-                key={results.recipe.shareAs}
-                image={results.recipe.image} 
-                recipeName={results.recipe.label}
-                recipeLink={results.recipe.url}
-                recipeIngredients={results.recipe.ingredientLines}
-                handleBtnClick={this.handleBtnClick}
-                likeTracker={this.state.like ? results.recipe.url : ""}
-                like={this.state.like ? "liked" : "unliked"}
-                // save={this.state.save ? "saved" : "unsaved"}
-                recipeID={index}
-                marker="true"
-              />
-            ))
-            :
-            displayResults.map((results, index) => (
-              <Card 
-                key={index}
-                user="test"
-                image={results.image} 
-                recipeName={results.name}
-                recipeLink={results.recipelink}
-                recipeIngredients={results.ingredients}
-                marker="false"
-              />
-            ))
-          }
-          </div>
-          </Col>
-        </Row>
-      </Container>
+              <div className="resultsWrapper" showcard={this.state.showCard}>
+                {!this.state.submitBtn ?
+                  displayResults.map((results, index) => (
+                    <Card
+                      key={results.recipe.shareAs}
+                      image={results.recipe.image}
+                      recipeName={results.recipe.label}
+                      recipeLink={results.recipe.url}
+                      recipeIngredients={results.recipe.ingredientLines}
+                      handleBtnClick={this.handleBtnClick}
+                      likeTracker={this.state.like ? results.recipe.url : ""}
+                      like={this.state.like ? "liked" : "unliked"}
+                      // save={this.state.save ? "saved" : "unsaved"}
+                      recipeID={index}
+                      marker="true"
+                    />
+                  ))
+                  :
+                  displayResults.map((results, index) => (
+                    <Card
+                      key={index}
+                      user="test"
+                      image={results.image}
+                      recipeName={results.name}
+                      recipeLink={results.recipelink}
+                      recipeIngredients={results.ingredients}
+                      marker="false"
+                    />
+                  ))
+                }
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </body>
     );
   }

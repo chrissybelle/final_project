@@ -22,7 +22,7 @@ const edamamFunctions = {
   },
   findByEdamam: function (req, res) {
     db.Edamam
-      .find({ 'user': 'test', 'name': req.params.name })
+      .find({ 'user': 'test', 'name': req.params.name }, {_id: 1})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
