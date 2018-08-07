@@ -7,21 +7,39 @@ body {
 }
 
 .createrecipe {
-    margin-left: 250px;
+    width: 200px;
+    margin-left: 150px;
     margin-top: 100px;
   }
 
+  .cancelbtn {
+    background-color: #e09b6a;
+    width: 200px;
+    margin-left: 150px;
+  }
+
+  .submitbtn{
+    background-color: #fad185;
+    width: 200px;
+    margin: 20px;
+  }
+
   .favrecipe {
-      margin: 100px;
-      float: right;
-      clear: both;
+      margin-top: -250px;
+      width: 100px;
+      /* float: right;
+      clear: both; */
   }
 
   .favrecipebtn {
-      margin-right: -100px;
-      margin-top: -55px;
       background-color: #fad185;
+      width: 200px;
   }
+
+  .searchForm {
+    margin-top: 50px;
+    width: 100px;
+}
 
   .savedRecipes{
     padding: 25px;
@@ -35,15 +53,8 @@ body {
     overflow: hidden;
     width: auto;
     /* margin: 0 auto; */
-    margin: 50px;
-  }
-
-  .cancelbtn {
-    background-color: #e09b6a;
-  }
-
-  .submitbtn{
-    background-color: #fad185;
+    margin-left: 200px;
+    margin-top: 150px;
   }
 
   button:hover:before {
@@ -76,56 +87,3 @@ button:disabled {
     background-color: #fff2da;
     box-shadow: none;
   }
-
-  /* Edamam Css
-
-.searchbtn {
-  background-color: #fad185;
-}
-
-.savedbtn {
-  background-color: (224,155,106);
-}
-
-.searchForm {
-    margin-top: 50px;
-}
-
-.savedForm {
-    margin: 40px 0;
-}
-
-button {
-    border-radius: 3px;
-    width: 100%;
-    padding: 10px 35px;  
-    overflow:hidden;
-    border: 2px solid #fad185;
-}
-
-button:hover {
-    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.15);
-}
-
-button:disabled {
-    background-color: #fff2da;
-    box-shadow: none;
-  }
-
-
-/* .savedbtn:before {
-	font-family: FontAwesome;
-	/* content:">>"; */
-	/* position: absolute; */
-	/* top: 11px;
-	left: -50px;
-	transition: all 200ms ease;
-}
-
-.resultsWrapper {
-    height: 450px;
-    overflow: scroll;
-    padding: 20px;
-    margin-top: 100px;
-
-} */ 

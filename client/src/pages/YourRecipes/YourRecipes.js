@@ -182,17 +182,15 @@ class TestPage extends React.Component {
 
 
     favRecipe = () => (
-            <div className="col-md-6 col-sm-12">
+            <div>
                     <Col size="md-6 sm-12">
-                        <form>
-                            <div className="favrecipe">
+                        <form className="favRecipe">
                                 <Input
                                     value={this.state.queryString}
                                     onChange={this.handleInputChange}
                                     name="queryString"
-                                    placeholder="Search"
+                                    placeholder="Enter Search Term Here"
                                 />
-                            </div>
                             <button className="favrecipebtn"
                                 disabled={!(this.state.queryString)}
                                 onClick={this.handleSearchSubmit}
