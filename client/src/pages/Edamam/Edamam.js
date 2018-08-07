@@ -182,7 +182,7 @@ class EdamamSearch extends React.Component {
   deleteRecipes = (id, user) => {
     user = this.state.user;
     API.deleteEdamamID(id)
-        .then(res => API.searchForLiked(user)
+      .then(res => API.searchForLiked(user)
         .then(res => {
           uniqueResults = res.data;
           this.setState({
@@ -190,8 +190,8 @@ class EdamamSearch extends React.Component {
             submitBtn: true
           })
         }))
-        .catch(err => console.log(err));
-};
+      .catch(err => console.log(err));
+  };
   // Saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
@@ -220,7 +220,7 @@ class EdamamSearch extends React.Component {
 
     // console.log(this.state.like);
 
-    
+
 
     // searches db if recipe has aleady been saved
     API.findOneEdamam(cardName, user)
@@ -309,8 +309,8 @@ class EdamamSearch extends React.Component {
       <div className="bgImage">
         <Container fluid>
           <Row>
-            <Col size="md-3">
-              <h1>Search</h1>
+            <Col size="md-3"><div className="header">
+              <h1>Search</h1></div>
               <form id="searchForm">
                 <div className="searchForm">
                   <Input
@@ -324,7 +324,6 @@ class EdamamSearch extends React.Component {
                     disabled={!(this.state.queryString)}
                     onClick={this.handleFormSubmit}
                   >
-                    <i className="fas fa-utensils" />
                     Search!
                 </button>
                 </div>
