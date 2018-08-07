@@ -12,7 +12,6 @@ const recipeSchema = new Schema({
   sharable: {type: Boolean, required: true},
   origin: { type : String},
   labels: { type: String, text: true},
-  liked: { type: Boolean, required: true, default: false }
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
