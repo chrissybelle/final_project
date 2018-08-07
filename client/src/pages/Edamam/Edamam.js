@@ -10,6 +10,8 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import { withMultiContext } from "with-context";
 import { AppContext } from '../../components/AppProvider/AppProvider.js';
 import "./Edamam.css";
+import SavedCards from "../../components/SavedCards";
+
 
 
 let searchResults = [];
@@ -43,11 +45,11 @@ class EdamamSearch extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('recipes receiving user', nextProps.appContext.user);
     if (nextProps.appContext.user) {
-        this.setState({ user: nextProps.appContext.user });
+      this.setState({ user: nextProps.appContext.user });
 
     }
 
-}
+  }
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -85,31 +87,31 @@ class EdamamSearch extends React.Component {
               for (var j = 0; j < dbSavedResults.length; j++) {
                 if (searchResults[i].recipe.url === dbSavedResults[j].recipelink[0]) {
                   searchResults.splice(i, 1);
-                  }
                 }
               }
-
-              uniqueResults = searchResults;
-              console.log("FINAL: " + uniqueResults[0].recipe.url);
-              this.setState({
-                displayRecipes: uniqueResults
-              })
             }
-            // for (var i=0; i<searchResults.length; i++) {
-            //   console.log("ok");
-            //   for (var j=0; j<dbSavedResults.length; j++) {
-      
-    
-            //     if (searchResults[i].recipe.url !== dbSavedResults[j].recipelink[0]) {
 
-            //       displayResults.push(searchResults[i]);
-        
-            //     }
-            //   }
-            // }
-            // console.log("FINAL:" + displayResults);
-            // uniqueResults = Array.from(new Set(displayResults));
-            // console.log("UNIQUE: " + uniqueResults);
+            uniqueResults = searchResults;
+            console.log("FINAL: " + uniqueResults[0].recipe.url);
+            this.setState({
+              displayRecipes: uniqueResults
+            })
+          }
+          // for (var i=0; i<searchResults.length; i++) {
+          //   console.log("ok");
+          //   for (var j=0; j<dbSavedResults.length; j++) {
+
+
+          //     if (searchResults[i].recipe.url !== dbSavedResults[j].recipelink[0]) {
+
+          //       displayResults.push(searchResults[i]);
+
+          //     }
+          //   }
+          // }
+          // console.log("FINAL:" + displayResults);
+          // uniqueResults = Array.from(new Set(displayResults));
+          // console.log("UNIQUE: " + uniqueResults);
           // }
 
         );
@@ -177,6 +179,19 @@ class EdamamSearch extends React.Component {
       })
   };
 
+  deleteRecipes = (id, user) => {
+    user = this.state.user;
+    API.deleteEdamamID(id)
+        .then(res => API.searchForLiked(user)
+        .then(res => {
+          uniqueResults = res.data;
+          this.setState({
+            displayRecipes: uniqueResults,
+            submitBtn: true
+          })
+        }))
+        .catch(err => console.log(err));
+};
   // Saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
@@ -205,7 +220,7 @@ class EdamamSearch extends React.Component {
 
     // console.log(this.state.like);
 
-
+    
 
     // searches db if recipe has aleady been saved
     API.findOneEdamam(cardName, user)
@@ -352,15 +367,17 @@ class EdamamSearch extends React.Component {
                   ))
                   :
                   uniqueResults.map((results, index) => (
-                    <Card
-                      key={index}
+                    <SavedCards
+                      key={results._id}
                       user={this.state.user}
                       image={results.image}
                       recipeName={results.name}
                       recipeLink={results.recipelink}
                       recipeIngredients={results.ingredients}
-                      marker="false"
-                    />
+                      deleteRecipe={() => this.deleteRecipes(results._id)}>
+                    </SavedCards>
+
+
                   ))
                 }
               </div>

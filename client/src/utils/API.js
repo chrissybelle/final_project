@@ -52,8 +52,10 @@ export default {
   // Deletes saved Edamam recipe from our db
   // see "removeEdamam" in edamamController
   deleteEdamam: function (cardName) {
-    console.log("api hit");
     return axios.delete("/api/recipes/edamam/" + cardName);
+  },
+  deleteEdamamID: function (id) {
+    return axios.delete("/api/recipes/edamam/user/remove/" + id);
   },
   // Searches our db for previously saved Edamam recipes -***** need to add user
   // see "findByUser" in edamamController

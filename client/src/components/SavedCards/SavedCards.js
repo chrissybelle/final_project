@@ -48,7 +48,7 @@ class ListItem extends React.Component {
 ListItem.propTypes = {
   image: PropTypes.string,
   recipeName: PropTypes.string,
-  recipeLink: PropTypes.string,
+  recipeLink: PropTypes.array,
   showCard: PropTypes.string,
   deleteRecipe: PropTypes.func
 }

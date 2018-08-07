@@ -109,6 +109,13 @@ const edamamFunctions = {
         .find({ 'user': req.params.user})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    },
+    removeEdamamID: function (req, res) {
+      db.Edamam
+        .findById({ _id: req.params.id })
+        .then(dbModel => dbModel.remove())
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
   }
   
@@ -122,6 +129,8 @@ const edamamFunctions = {
   router.delete("/api/recipes/edamam/:name", edamamFunctions.removeEdamam)
   
   router.get("/api/recipes/edamam/user/:user", edamamFunctions.findByUser)
+
+  router.delete("/api/recipes/edamam/user/remove/:id", edamamFunctions.removeEdamamID)
 
 
 
