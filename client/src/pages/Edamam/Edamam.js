@@ -2,15 +2,18 @@ import React from "react";
 // import Jumbotron from "../../components/Jumbotron";
 import Card from "../../components/Card";
 import CardBtn from "../../components/CardBtn";
+import FeedbackModal from "../../components/FeedbackModal";
 import Wrapper from "../../components/Wrapper";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./Edamam.css";
 
-// let searchResults = [];
+
+let searchResults = [];
 let dbSavedResults = [];
 let displayResults = [];
+let uniqueResults = [];
 
 // S E A R C H  E D A M A M   A P I
 
@@ -23,7 +26,8 @@ class EdamamSearch extends React.Component {
       showCard: false,
       like: false,
       submitBtn: false,
-      displayRecipes: []
+      displayRecipes: [],
+      refresh: []
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
   }
@@ -53,27 +57,110 @@ class EdamamSearch extends React.Component {
       //makes AJAX call to Edamam API
       API.searchEdamam(this.state.queryString)
         .then(res => {
-          displayResults = res.data.hits;
-          this.setState({
-            showCard: true,
-            displayRecipes: displayResults,
-            submitBtn: false
-          })
+          searchResults = res.data.hits;
         })
-        .catch(err => console.log(err));
+        .then(
+          API.findEdamamUser("test")
+            .then(res => {
+              dbSavedResults = res.data;
+            })
+
+        )
+        .then(
+          this.checkResults = () => {
+            console.log(searchResults);
+            console.log(dbSavedResults.length);
+
+            for (var i = searchResults.length - 1; i >= 0; i--) {
+              for (var j = 0; j < dbSavedResults.length; j++) {
+                if (searchResults[i].recipe.url === dbSavedResults[j].recipelink[0]) {
+                  searchResults.splice(i, 1);
+                  }
+                }
+              }
+
+              uniqueResults = searchResults;
+              console.log("FINAL: " + uniqueResults[0].recipe.url);
+              this.setState({
+                displayRecipes: uniqueResults
+              })
+            }
+            // for (var i=0; i<searchResults.length; i++) {
+            //   console.log("ok");
+            //   for (var j=0; j<dbSavedResults.length; j++) {
+      
+    
+            //     if (searchResults[i].recipe.url !== dbSavedResults[j].recipelink[0]) {
+
+            //       displayResults.push(searchResults[i]);
+        
+            //     }
+            //   }
+            // }
+            // console.log("FINAL:" + displayResults);
+            // uniqueResults = Array.from(new Set(displayResults));
+            // console.log("UNIQUE: " + uniqueResults);
+          // }
+
+        );
+
+
+
+
+      // )
+      // .catch(err => console.log(err));
+
+
+
+
+      // .then(
+      //   this.setState({
+      //     showCard: true,
+      //     displayRecipes: displayResults,
+      //     submitBtn: false
+      //   })
+      // )
+
+
+
     }
+
+
     //clears out search term in input box
     this.state.queryString = "";
   };
+
+
+
+  // checkResults = (searchResults, dbSavedResults, displayResults) => {
+  //   console.log(searchResults);
+  //   console.log(dbSavedResults);
+  //   for (var i=0; i<12; i++) {
+  //     console.log("ok");
+  //     for (var j=0; j<12; j++) {
+
+  //       console.log(searchResults[i].recipe.url);
+  //       console.log(dbSavedResults[j].recipelink[0]);
+
+  //       if (searchResults[i].recipe.url !== dbSavedResults[j].recipelink[0]) {
+  //         displayResults.push(searchResults[i]);
+
+  //       }
+  //     }
+  //   }
+  //   console.log(displayResults);
+  // }
+
+
 
   //to pull list of your saved recipes
   handleFormSubmitSaved = event => {
     event.preventDefault();
     API.searchForLiked()
       .then(res => {
-        displayResults = res.data;
+        uniqueResults = res.data;
         this.setState({
-          displayRecipes: displayResults,
+          displayRecipes: uniqueResults,
           submitBtn: true
         })
       })
@@ -90,9 +177,9 @@ class EdamamSearch extends React.Component {
     const cardLike = event.target.attributes.getNamedItem("data-like").value;
     const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
     //const cardID = event.target.attributes.getNamedItem("data-value").value;
-    console.log(`like triggered, info will be posted to db: (BTNLIKE)
-    ${cardLikeTracker}, ${cardLike}
-    `);
+    // console.log(`like triggered, info will be posted to db: (BTNLIKE)
+    // ${cardLikeTracker}, ${cardLike}
+    // `);
 
 
     //GET request from db, should return URL's of results in an array belonging to your user
@@ -104,18 +191,24 @@ class EdamamSearch extends React.Component {
     //for loop through resultarray.length
     //if cardLink matches any result in the array then console.log("alreadys saved")
 
-    console.log(this.state.like);
-    //searches db if recipe has aleady been saved
+    // console.log(this.state.like);
+
+
+
+    // searches db if recipe has aleady been saved
     API.findOneEdamam(cardName)
       .then(res => {
         console.log(res.data);
+
+        // if recipe is saved in our db already
         if (res.data !== null) {
 
+          // delete recipe
           this.deleteEdamam(cardName);
           console.log("recipe deleted");
 
 
-
+          // else if recipe is not saved in our db already, save the recipe
         } else if (res) {
           console.log("saving recipe");
           API.saveEdamam({
@@ -128,9 +221,8 @@ class EdamamSearch extends React.Component {
           }).then(res => {
             //locate recipe that was saved
             console.log("recipe saved");
+            //show feedback in modal
 
-            //then update liked status of recipe in db
-            // .then
 
           })
 
@@ -179,7 +271,7 @@ class EdamamSearch extends React.Component {
     //   .then(res => {
     //     // deletes that recipe from our db
     //     console.log("!!!!" + res.data)
-        API.deleteEdamam(cardName)
+    API.deleteEdamam(cardName)
       // })
       .catch(err => console.log(err));
   };
@@ -187,7 +279,7 @@ class EdamamSearch extends React.Component {
 
   render() {
     return (
-      <body className="background2">
+      <div className="background2">
         <Container fluid>
           <Row>
             <Col size="md-3">
@@ -227,14 +319,16 @@ class EdamamSearch extends React.Component {
                 <h1>Your Saved Recipes </h1>
               }
 
+              {/* <FeedbackModal /> */}
+
               <div className="resultsWrapper" showcard={this.state.showCard}>
                 {!this.state.submitBtn ?
-                  displayResults.map((results, index) => (
+                  uniqueResults.map((results, index) => (
                     <Card
                       key={results.recipe.shareAs}
                       image={results.recipe.image}
                       recipeName={results.recipe.label}
-                      recipeLink={results.recipe.url}
+                      recipeLink={results.recipe.url[0]}
                       recipeIngredients={results.recipe.ingredientLines}
                       handleBtnClick={this.handleBtnClick}
                       likeTracker={this.state.like ? results.recipe.url : ""}
@@ -245,7 +339,7 @@ class EdamamSearch extends React.Component {
                     />
                   ))
                   :
-                  displayResults.map((results, index) => (
+                  uniqueResults.map((results, index) => (
                     <Card
                       key={index}
                       user="test"
@@ -258,10 +352,13 @@ class EdamamSearch extends React.Component {
                   ))
                 }
               </div>
+
+
             </Col>
           </Row>
         </Container>
-      </body>
+
+      </div>
     );
   }
 }

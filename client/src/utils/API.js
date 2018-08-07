@@ -9,9 +9,9 @@ export default {
   getRecipesUser: function (user) {
     return axios.get("/api/recipes/user/" + user);
   },
-   //Search recipes from user by keyword 
-   getRecipesUserQuery: function (user, queryString) {
-    return axios.get("/api/recipes/search/" + user, {params:{searchQuery:queryString}});
+  //Search recipes from user by keyword 
+  getRecipesUserQuery: function (user, queryString) {
+    return axios.get("/api/recipes/search/" + user, { params: { searchQuery: queryString } });
   },
   // Deletes the recipe with the given id
   deleteRecipes: function (id) {
@@ -34,28 +34,32 @@ export default {
   searchEdamam: function (queryString) {
     return axios.get("https://api.edamam.com/search?q=" + queryString + "&app_id=a5ee7877&app_key=385a3e92adcbf250abaab079e4e705f5&to=12");
   },
-    // Saves Edamam API recipes to our db
-  // 9see "savedEdamam" in edmamaController
+  // Saves Edamam API recipes to our db
+  // See "savedEdamam" in edmamamController
   saveEdamam: function (recipeData) {
     return axios.post("/api/recipes/edamam/", recipeData);
   },
-  // Searches our db for liked recipes from Edamam db
-  // (see "findLikedEdamam" in edamamController)
+  // Searches our db for liked recipes from Edamam db - used for "View Saved Recipes"
+  // see "findLikedEdamam" in edamamController
   searchForLiked: function () {
     return axios.get("/api/recipes/edamam/liked")
   },
+  // Used to search our db to see if clicked recipe has already been saved
+  // see "findOneEdamam" in edamamController
   findOneEdamam(name) {
     return axios.get("/api/recipes/edamam/search/" + name)
   },
-  // Searches our db for previously saved Edamam recipes -***** need to add user
-  findEdamamID: function (cardName) {
-    // console.log(cardLink);
-    return axios.get("/api/recipes/edamam/search/" + cardName);
-    // console.log({params:{searchQuery:cardLink}});
-  },
   // Deletes saved Edamam recipe from our db
+  // see "removeEdamam" in edamamController
   deleteEdamam: function (cardName) {
     console.log("api hit");
     return axios.delete("/api/recipes/edamam/" + cardName);
+  },
+  // Searches our db for previously saved Edamam recipes -***** need to add user
+  // see "findByUser" in edamamController
+  findEdamamUser: function (user) {
+    // console.log(cardLink);
+    return axios.get("/api/recipes/edamam/user/" + user);
+    // console.log({params:{searchQuery:cardLink}});
   }
 };
