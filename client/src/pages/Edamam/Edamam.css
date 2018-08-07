@@ -1,11 +1,13 @@
-body {
+
+
+.bgImage {
     background-image: url("../../imgs/resize.jpg");
     background-repeat: no-repeat;
-    background-position: center;
+    /* background-position: center; */
     background-size: 100% 100%;
     overflow: auto;
+    min-height:700px;
 }
-
 .searchbtn {
   background-color: #fad185;
 }
@@ -69,4 +71,8 @@ button:hover:before {
     padding: 20px;
     margin-top: 100px;
 
+}
+
+#warning{
+    
 }

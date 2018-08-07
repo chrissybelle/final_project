@@ -1,7 +1,7 @@
-body {
+.bgImage {
     background-image: url("../../imgs/resize.jpg");
     background-repeat: no-repeat;
-    background-position: center;
+    /* background-position: center; */
     background-size: 100% 100%;
     overflow: auto;
 }
@@ -83,3 +83,9 @@ button:disabled {
     background-color: #fff2da;
     box-shadow: none;
   }
+
+#warning{
+    font-family: FontAwesome;
+    
+
+}

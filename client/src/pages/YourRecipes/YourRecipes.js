@@ -241,21 +241,27 @@ class TestPage extends React.Component {
     render() {
         if (this.state.isUpdate)
             return (
-
-                <Row>
-                    {this.createRecipe()}
-                    {this.favRecipe()}
-                </Row>
+                <div className="bgImage">
+                    <Row>
+                        {this.createRecipe()}
+                        {/* {this.favRecipe()} */}
+                    </Row>
+                </div>
             )
         else if (this.props.appContext.user)
             return (
-                <Row>
-                    {this.buttonCreate()}
-                    {this.favRecipe()}
-                </Row>
+                <div className="bgImage">
+                    <Row>
+                        {this.buttonCreate()}
+                        {this.favRecipe()}
+                    </Row>
+                </div>
+
             );
         else return (
-            <div> Please Sign In!</div>
+            <div className="bgImage">
+                <div id = "warning"> Please Sign In!</div>
+            </div>
         )
     }
 

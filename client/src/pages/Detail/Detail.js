@@ -67,7 +67,7 @@ class Detail extends React.Component {
             <ul>
               <h1 >Ingredients</h1>
               <span>
-          <img id = "foodImage" src={this.state.recipe.image}  height="42" width="42"/>
+          <img id = "foodImage" alt = "food" src={this.state.recipe.image}  height="42" width="42"/>
            </span> 
               {this.state.ingredientsList.map(ingredients => (
                 <li> {ingredients} </li> 

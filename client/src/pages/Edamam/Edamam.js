@@ -306,7 +306,7 @@ class EdamamSearch extends React.Component {
 
   render() {
     return (
-      <div className="background2">
+      <div className="bgImage">
         <Container fluid>
           <Row>
             <Col size="md-3">
