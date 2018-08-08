@@ -135,48 +135,48 @@ class TestPage extends React.Component {
 
 
     createRecipe = () => (
-        <Col size="md-6 sm-12">
-            <form>
-                <Input
-                    value={this.state.name}
-                    onChange={this.handleInputChange}
-                    name="name"
-                    placeholder="Name (required)"
-                />
-                <TextArea
-                    value={this.state.ingredients}
-                    onChange={this.handleInputChange}
-                    name="ingredients"
-                    placeholder="Ingredients (required)"
-                />
-                <TextArea
-                    value={this.state.description}
-                    onChange={this.handleInputChange}
-                    name="description"
-                    placeholder="Description (required)"
-                />
-                <Input
-                    value={this.state.image}
-                    onChange={this.handleInputChange}
-                    name="image"
-                    placeholder="Image URL"
-                />
-                <Input
-                    value={this.state.origin}
-                    onChange={this.handleInputChange}
-                    name="origin"
-                    placeholder="Origin"
-                />
-                <button className="cancelbtn" onClick={() => this.handleUpdate(false)}>Cancel</button>
-                {/* <FormBtn */}
-                <button className="submitbtn"
-                    disabled={!(this.state.name && this.state.ingredients && this.state.description)}
-                    onClick={this.handleFormSubmit}>
-                    Submit Recipe </button>
-                {/* </FormBtn> */}
+            <div className="col-md-6 col-sm-12 addRecipe">
+                <form>
+                    <Input
+                        value={this.state.name}
+                        onChange={this.handleInputChange}
+                        name="name"
+                        placeholder="Name (required)"
+                    />
+                    <TextArea
+                        value={this.state.ingredients}
+                        onChange={this.handleInputChange}
+                        name="ingredients"
+                        placeholder="Ingredients (required)"
+                    />
+                    <TextArea
+                        value={this.state.description}
+                        onChange={this.handleInputChange}
+                        name="description"
+                        placeholder="Description (required)"
+                    />
+                    <Input
+                        value={this.state.image}
+                        onChange={this.handleInputChange}
+                        name="image"
+                        placeholder="Image URL"
+                    />
+                    <Input
+                        value={this.state.origin}
+                        onChange={this.handleInputChange}
+                        name="origin"
+                        placeholder="Origin"
+                    />
+                    <button className="cancelbtn" onClick={() => this.handleUpdate(false)}>Cancel</button>
+                    {/* <FormBtn */}
+                    <button className="submitbtn"
+                        disabled={!(this.state.name && this.state.ingredients && this.state.description)}
+                        onClick={this.handleFormSubmit}>
+                        Submit Recipe </button>
+                    {/* </FormBtn> */}
 
-            </form>
-        </Col>
+                </form>
+            </div>
     );
 
 
@@ -203,12 +203,12 @@ class TestPage extends React.Component {
                                     Search!
                         </button>
                             </div>
-                                <div className="createrecipe">
-                                    <button className="createbtn" 
-                                    onClick={() => this.handleUpdate(true)}> 
-                                    <i className="fas fa-utensils" /> 
+                            <div className="createrecipe">
+                                <button className="createbtn"
+                                    onClick={() => this.handleUpdate(true)}>
+                                    <i className="fas fa-utensils" />
                                     Create Recipe</button>
-                                </div>
+                            </div>
                         </form>
                     </Col>
                     <Col size="md-6">
@@ -260,11 +260,13 @@ class TestPage extends React.Component {
                     <Row>
                         {this.createRecipe()}
                     </Row>
+                    
                 </div>
             )
         else if (this.props.appContext.user)
             return (
                 <div className="bgImage">
+                
                     <Row>
                         {/* {this.buttonCreate()} */}
                         {this.favRecipe()}

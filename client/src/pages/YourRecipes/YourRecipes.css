@@ -6,6 +6,11 @@
     overflow: auto;
 }
 
+.addRecipe{
+    margin: auto;
+    margin-top: 10px;
+}
+
 .createrecipe {
     width: 250px;
     margin-left: 175px;

@@ -48,7 +48,7 @@ class SavedCards extends React.Component {
 SavedCards.propTypes = {
   image: PropTypes.string,
   recipeName: PropTypes.string,
-  recipeLink: PropTypes.array,
+  recipeLink: PropTypes.string,
   recipeIngredients: PropTypes.array,
   showCard: PropTypes.string,
   deleteRecipe: PropTypes.func
