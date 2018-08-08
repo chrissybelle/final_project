@@ -10,14 +10,17 @@
 }
 .searchbtn {
   background-color: #fad185;
+  
 }
 
 .savedbtn {
   background-color: (224,155,106);
+  
 }
 
 .searchForm {
     margin-top: 50px;
+    margin-left:50px;
 }
 
 .savedForm {
@@ -57,13 +60,18 @@ button:hover:before {
 
 .fa-utensils {
     opacity: 0.75;
+    color: green;
+    padding: 5px;
 }
 
 .fa-utensils:hover {
     /* opacity: 1; */
     font-size: 20px;
     transition: all 200ms ease;
+    
+    
 }
+
 
 .resultsWrapper {
     height: 450px;
@@ -73,6 +81,13 @@ button:hover:before {
 
 }
 
-#warning{
-    
-}
+h1{
+        font-family: 'EB Garamond', serif;;
+        font-size: 30px;
+        text-align: center; 
+        margin-top:20px; 
+        color:black;
+        background-color: rgb(156, 199, 112);
+        border-radius: 25px;
+        opacity: .7;
+    }

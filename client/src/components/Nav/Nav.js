@@ -7,8 +7,8 @@ import "./nav.css";
 const Nav = () =>
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <a className="navbar-brand" href="">
-      <img src="/hat.ico" width="30" height="30"
-        className="d-inline-block align-top" alt=""/>  Your Perfect Recipes!</a>
+      <img src="/images/YourPerfectRecipe.png" width="50" height="50"
+        className="d-inline-block align-top" alt=""/>  <h2>Your Perfect Recipes!</h2></a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>

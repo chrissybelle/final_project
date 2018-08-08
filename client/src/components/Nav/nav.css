@@ -1,3 +1,27 @@
 .navbar{
-    height: 55px;
+    height: 65px;
+}
+
+h2 {
+    font-family: 'Merienda', cursive;
+    font-size: 40px ;
+    padding: 5px;
+    color: rgba(19, 57, 78, 0.808);
+    float: right;
+    }
+  
+.nav-link{
+    font-family: 'EB Garamond', serif;;
+    font-size: 25px;
+    text-align: center;  
+    color: rgba(19, 57, 78, 0.808);
+}
+  
+.navbar-nav {
+  padding: 75px;
+}
+ 
+.navbar-text{
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
 }
