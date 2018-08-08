@@ -309,8 +309,8 @@ class EdamamSearch extends React.Component {
       <div className="bgImage">
         <Container fluid>
           <Row>
-            <Col size="md-3"><div className="header">
-              <h1>Search</h1></div>
+            <Col size="md-6">
+              <h1 className ="results">Search</h1>
               <form id="searchForm">
                 <div className="searchForm">
                   <Input
@@ -338,11 +338,11 @@ class EdamamSearch extends React.Component {
                 </div>
               </form>
             </Col>
-            <Col size="md-9">
+            <Col size="md-6">
               {!this.state.submitBtn ?
-                <h1>Search Results</h1>
+                <h1 className ="results">Search Results</h1>
                 :
-                <h1>Your Saved Recipes </h1>
+                <h1 className ="results">Your Saved Recipes </h1>
               }
 
               {/* <FeedbackModal /> */}
