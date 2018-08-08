@@ -57,12 +57,7 @@ class TestPage extends React.Component {
     loadUserRecipes = (user) => {
         API.getRecipesUser(user)
             .then(res =>
-                this.setState({
-                    recipes: res.data, name: "", ingredients: "", description: "",
-                    origin: "",
-                    labels: "",
-                    image: ""
-                })
+                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", origin: "", labels: "", image: "" })
             )
             .catch(err => console.log(err));
     }
@@ -140,7 +135,7 @@ class TestPage extends React.Component {
 
 
     createRecipe = () => (
-        <Col size="md-6 sm-12"><h1 className="create">Create a Recipe</h1><div className="recipe">
+        <Col size="md-6 sm-12">
             <form>
                 <Input
                     value={this.state.name}
@@ -179,8 +174,8 @@ class TestPage extends React.Component {
                     onClick={this.handleFormSubmit}>
                     Submit Recipe </button>
                 {/* </FormBtn> */}
+
             </form>
-        </div>
         </Col>
     );
 
@@ -189,7 +184,7 @@ class TestPage extends React.Component {
     favRecipe = () => (
         <div>
             <Col size="md-6 sm-12">
-                <form>
+                <form id="searchForm">
                     <div className="searchForm">
                         <Input
                             value={this.state.queryString}
@@ -206,7 +201,7 @@ class TestPage extends React.Component {
                     </div>
                 </form>
             </Col>
-            <div className="savedRecipes" >
+            <div className="savedRecipes">
                 {this.state.searchRecipes.length ? (
                     <Col size="md-12 sm-12">
                         {this.state.searchRecipes.map(searchRecipes => {
@@ -265,7 +260,7 @@ class TestPage extends React.Component {
             );
         else return (
             <div className="bgImage">
-                <div id="warning"> Please Sign In!</div>
+                <div id = "warning"> Please Sign In!</div>
             </div>
         )
     }

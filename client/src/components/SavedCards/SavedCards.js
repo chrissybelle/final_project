@@ -8,12 +8,12 @@ import DeleteBtn from "../../components/DeleteBtn";
 
 
 
-class ListItem extends React.Component {
+class SavedCards extends React.Component {
 
 
   render () {
     const { image, recipeName, recipeLink, deleteRecipe, recipeIngredients } = this.props
-    console.log(recipeIngredients);
+
     return (
       // fix loading spinner
         <ul className="recipeResults">
@@ -45,7 +45,7 @@ class ListItem extends React.Component {
   }
 }
 
-ListItem.propTypes = {
+SavedCards.propTypes = {
   image: PropTypes.string,
   recipeName: PropTypes.string,
   recipeLink: PropTypes.array,
@@ -54,4 +54,4 @@ ListItem.propTypes = {
   deleteRecipe: PropTypes.func
 }
 
-export default ListItem;
+export default SavedCards;
