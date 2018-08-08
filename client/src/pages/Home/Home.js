@@ -12,7 +12,7 @@ import "./Home.css";
 let searchResults = [];
 let cardID = [];
 
-const options = ["cookies", "brownies", "pizza", "chicken wings", "turkey", "pasta"]
+const options = ["cookies", "brownies", "pizza", "chicken wings", "rice", "pasta", "risotto", "paella"]
 let rand = Math.floor(Math.random() * 6) + 1
 let searchQuery = options[rand]
 
