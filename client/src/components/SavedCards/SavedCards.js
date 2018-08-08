@@ -13,7 +13,7 @@ class ListItem extends React.Component {
 
   render () {
     const { image, recipeName, recipeLink, deleteRecipe, recipeIngredients } = this.props
-
+    console.log(recipeIngredients);
     return (
       // fix loading spinner
         <ul className="recipeResults">

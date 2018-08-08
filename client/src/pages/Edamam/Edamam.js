@@ -99,7 +99,8 @@ class EdamamSearch extends React.Component {
             uniqueResults = searchResults;
             console.log("FINAL: " + uniqueResults.length);
             this.setState({
-              displayRecipes: uniqueResults
+              displayRecipes: uniqueResults,
+              submitBtn: false
             })
           }
           // for (var i=0; i<searchResults.length; i++) {
@@ -199,10 +200,11 @@ class EdamamSearch extends React.Component {
   };
 
 
-  // Saves recipes to db
+  // on click heart button - saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
     console.log(this.props.appContext.user);
+  
 
     //check if user is logged in
     if (this.props.appContext.user) {
@@ -243,7 +245,6 @@ class EdamamSearch extends React.Component {
               //locate recipe that was saved
               console.log("recipe saved");
               //show feedback in modal
-
 
             })
 
