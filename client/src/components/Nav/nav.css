@@ -9,6 +9,10 @@ h2 {
     color: rgba(19, 57, 78, 0.808);
     float: right;
     }
+
+    #logo{
+        margin-top: 4px;
+    }
   
 .nav-link{
     font-family: 'EB Garamond', serif;;
