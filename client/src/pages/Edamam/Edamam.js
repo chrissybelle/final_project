@@ -197,10 +197,13 @@ class EdamamSearch extends React.Component {
         }))
       .catch(err => console.log(err));
   };
+
+
   // Saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
     console.log(this.props.appContext.user);
+
     //check if user is logged in
     if (this.props.appContext.user) {
       // Get the data from  the clicked button
@@ -211,7 +214,7 @@ class EdamamSearch extends React.Component {
       const cardLike = event.target.attributes.getNamedItem("data-like").value;
       const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
       const user = this.state.user
-      console.log(cardLink);
+      console.log(cardLink, );
 
       // searches db if recipe has aleady been saved
       API.findOneEdamam(cardName, user)
@@ -351,6 +354,7 @@ class EdamamSearch extends React.Component {
                 <div className="savedForm">
                   <button
                     className="savedbtn"
+                    disabled={!(this.state.user)}
                     onClick={this.handleFormSubmitSaved}
                   >
                     <i className="fas fa-utensils" />
