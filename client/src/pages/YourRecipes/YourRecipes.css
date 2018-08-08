@@ -7,34 +7,42 @@
 }
 
 .createrecipe {
-    width: 200px;
+    width: 250px;
     margin-left: 150px;
     margin-top: 100px;
   }
 
   .cancelbtn {
     background-color: #e09b6a;
-    width: 200px;
-    margin-left: 150px;
+    width: 190px;
   }
 
   .submitbtn{
     background-color: #fad185;
-    width: 200px;
-    margin: 20px;
+    width: 193px;
+    margin-left: 15px;
+  }
+
+  .recipe{
+      width: 400px;
+      margin-left: 75px;
+      margin-top: 30px;
   }
 
   .favrecipebtn {
       background-color: #fad185;
-      width: 200px;
+      width: 250px;
       float: left;
       clear: both;
+      margin-top: -55px;
+      margin-left: 300px;
   }
 
-  .searchForm {
-    margin-top: 50px;
-    margin-left: 200px;
-    width: 200px;
+  .form-group {
+    margin-top: 100px;
+    margin-left: 70px;
+    width: 220px;
+    height: auto;
 }
 
   .savedRecipes{
@@ -67,11 +75,6 @@
     /* opacity: 1; */
     font-size: 20px;
     transition: all 200ms ease;
-}
-
-.favrecipebtn{
-    margin-left: 250px;
-    margin-top: -65px; 
 }
 
 /* .form-control{
