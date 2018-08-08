@@ -49,8 +49,10 @@
     overflow: hidden;
     width: auto;
     /* margin: 0 auto; */
-    margin-left: 200px;
+    margin-left: 50px;
     margin-top: 150px;
+    /* float: left; */
+    display: none;
   }
 
   button:hover:before {
@@ -65,6 +67,17 @@
     /* opacity: 1; */
     font-size: 20px;
     transition: all 200ms ease;
+}
+
+.favrecipebtn{
+    margin-left: 250px;
+ margin-top: -65px; 
+}
+
+.form-control{
+    margin-top: 100px;
+    height: 50px;
+    
 }
 
 button {
