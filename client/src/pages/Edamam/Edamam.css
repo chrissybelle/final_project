@@ -89,7 +89,7 @@ button:hover:before {
 }
 
 h1{
-        font-family: 'EB Garamond', serif;;
+        font-family: 'EB Garamond', serif;
         font-size: 30px;
         font-weight: bolder;
         text-align: center; 
@@ -111,4 +111,12 @@ h1{
     background-color: rgb(156, 199, 112);
     border-radius: 25px;
     width: 300px;
+}
+#warning{
+    font-family: FontAwesome;
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center; 
+    margin-top: 200px; 
+    color:black;
 }
