@@ -140,7 +140,7 @@ class TestPage extends React.Component {
 
 
     createRecipe = () => (
-        <Col size="md-6 sm-12"><div className="recipe">
+        <Col size="md-6 sm-12"><h1 className="create">Create a Recipe</h1><div className="recipe">
             <form>
                 <Input
                     value={this.state.name}
