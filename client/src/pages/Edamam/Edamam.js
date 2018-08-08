@@ -32,7 +32,8 @@ class EdamamSearch extends React.Component {
       submitBtn: false,
       displayRecipes: [],
       refresh: [],
-      user: null
+      user: null,
+      logInAlert: false,
     };
     this.handleBtnClick = this.handleBtnClick.bind(this);
   }
@@ -53,6 +54,7 @@ class EdamamSearch extends React.Component {
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
+    event.preventDefault();
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -63,6 +65,7 @@ class EdamamSearch extends React.Component {
   // Then reload recipes from the database
   handleFormSubmit = event => {
     event.preventDefault();
+    //uniqueResults = [];
     if (this.state.queryString) {
       console.log(this.state.queryString);
 
@@ -70,18 +73,20 @@ class EdamamSearch extends React.Component {
       API.searchEdamam(this.state.queryString)
         .then(res => {
           searchResults = res.data.hits;
+          console.log(res.data.hits[0].recipe.url);
         })
         .then(
           API.findEdamamUser(this.state.user)
             .then(res => {
               dbSavedResults = res.data;
+
             })
 
         )
         .then(
           this.checkResults = () => {
             console.log(searchResults);
-            console.log(dbSavedResults.length);
+            console.log(dbSavedResults);
 
             for (var i = searchResults.length - 1; i >= 0; i--) {
               for (var j = 0; j < dbSavedResults.length; j++) {
@@ -92,7 +97,7 @@ class EdamamSearch extends React.Component {
             }
 
             uniqueResults = searchResults;
-            console.log("FINAL: " + uniqueResults[0].recipe.url);
+            console.log("FINAL: " + uniqueResults.length);
             this.setState({
               displayRecipes: uniqueResults
             })
@@ -182,7 +187,7 @@ class EdamamSearch extends React.Component {
   deleteRecipes = (id, user) => {
     user = this.state.user;
     API.deleteEdamamID(id)
-        .then(res => API.searchForLiked(user)
+      .then(res => API.searchForLiked(user)
         .then(res => {
           uniqueResults = res.data;
           this.setState({
@@ -190,19 +195,66 @@ class EdamamSearch extends React.Component {
             submitBtn: true
           })
         }))
-        .catch(err => console.log(err));
-};
+      .catch(err => console.log(err));
+  };
   // Saves recipes to db
   handleBtnClick = (event) => {
     event.preventDefault();
-    // Get the data from  the clicked button
-    const cardLink = event.target.attributes.getNamedItem("data-recipelink").value;
-    const cardName = event.target.attributes.getNamedItem("data-recipename").value;
-    const cardImage = event.target.attributes.getNamedItem("data-image").value;
-    const cardIngredients = event.target.attributes.getNamedItem("data-recipeingredients").value;
-    const cardLike = event.target.attributes.getNamedItem("data-like").value;
-    const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
-    const user = this.state.user
+    console.log(this.props.appContext.user);
+    //check if user is logged in
+    if (this.props.appContext.user) {
+      // Get the data from  the clicked button
+      const cardLink = event.target.attributes.getNamedItem("data-recipelink").value;
+      const cardName = event.target.attributes.getNamedItem("data-recipename").value;
+      const cardImage = event.target.attributes.getNamedItem("data-image").value;
+      const cardIngredients = event.target.attributes.getNamedItem("data-recipeingredients").value;
+      const cardLike = event.target.attributes.getNamedItem("data-like").value;
+      const cardLikeTracker = event.target.attributes.getNamedItem("data-liketracker").value;
+      const user = this.state.user
+      console.log(cardLink);
+
+      // searches db if recipe has aleady been saved
+      API.findOneEdamam(cardName, user)
+        .then(res => {
+          console.log(res.data);
+
+          // if recipe is saved in our db already
+          if (res.data !== null) {
+
+            // delete recipe
+            this.deleteEdamam(cardName);
+            console.log("recipe deleted");
+
+
+            // else if recipe is not saved in our db already, save the recipe
+          } else if (res) {
+            console.log("saving recipe");
+            API.saveEdamam({
+              user: user,
+              name: cardName,
+              ingredients: cardIngredients,
+              recipelink: cardLink,
+              image: cardImage,
+              liked: true,
+            }).then(res => {
+              //locate recipe that was saved
+              console.log("recipe saved");
+              //show feedback in modal
+
+
+            })
+
+          }
+        })
+      //if user is not logged in, alert user
+    } else {
+      this.setState({
+        logInAlert: true
+      })
+        console.log(this.state.logInAlert)
+      
+    }
+
     //const cardID = event.target.attributes.getNamedItem("data-value").value;
     // console.log(`like triggered, info will be posted to db: (BTNLIKE)
     // ${cardLikeTracker}, ${cardLike}
@@ -220,41 +272,9 @@ class EdamamSearch extends React.Component {
 
     // console.log(this.state.like);
 
-    
-
-    // searches db if recipe has aleady been saved
-    API.findOneEdamam(cardName, user)
-      .then(res => {
-        console.log(res.data);
-
-        // if recipe is saved in our db already
-        if (res.data !== null) {
-
-          // delete recipe
-          this.deleteEdamam(cardName);
-          console.log("recipe deleted");
 
 
-          // else if recipe is not saved in our db already, save the recipe
-        } else if (res) {
-          console.log("saving recipe");
-          API.saveEdamam({
-            user: user,
-            name: cardName,
-            ingredients: cardIngredients,
-            recipelink: cardLink,
-            image: cardImage,
-            liked: true,
-          }).then(res => {
-            //locate recipe that was saved
-            console.log("recipe saved");
-            //show feedback in modal
 
-
-          })
-
-        }
-      })
   }
 
   //chck if recipe has been liked already, if not then save recipe to db
@@ -340,13 +360,22 @@ class EdamamSearch extends React.Component {
               </form>
             </Col>
             <Col size="md-9">
+
+
+
+
               {!this.state.submitBtn ?
                 <h1>Search Results</h1>
                 :
                 <h1>Your Saved Recipes </h1>
               }
 
-              {/* <FeedbackModal /> */}
+
+              {this.state.logInAlert ?
+                <FeedbackModal show={this.state.logInAlert} />
+                :
+                ""
+              }
 
               <div className="resultsWrapper" showcard={this.state.showCard}>
                 {!this.state.submitBtn ?
@@ -355,7 +384,7 @@ class EdamamSearch extends React.Component {
                       key={results.recipe.shareAs}
                       image={results.recipe.image}
                       recipeName={results.recipe.label}
-                      recipeLink={results.recipe.url[0]}
+                      recipeLink={results.recipe.url}
                       recipeIngredients={results.recipe.ingredientLines}
                       handleBtnClick={this.handleBtnClick}
                       likeTracker={this.state.like ? results.recipe.url : ""}
@@ -368,7 +397,7 @@ class EdamamSearch extends React.Component {
                   :
                   uniqueResults.map((results, index) => (
                     <SavedCards
-                      key={results._id}
+                      key={index}
                       user={this.state.user}
                       image={results.image}
                       recipeName={results.name}
