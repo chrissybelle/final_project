@@ -198,13 +198,9 @@ class EdamamSearch extends React.Component {
         }))
       .catch(err => console.log(err));
   };
-<<<<<<< HEAD
-  // Saves recipes to db
-=======
 
 
   // on click heart button - saves recipes to db
->>>>>>> ab523f7ceab3049f0cd39145140c12d1060b06b9
   handleBtnClick = (event) => {
     event.preventDefault();
     console.log(this.props.appContext.user);
@@ -280,22 +276,6 @@ class EdamamSearch extends React.Component {
 
     // console.log(this.state.like);
 
-<<<<<<< HEAD
-
-
-    // searches db if recipe has aleady been saved
-    API.findOneEdamam(cardName, user)
-      .then(res => {
-        console.log(res.data);
-
-        // if recipe is saved in our db already
-        if (res.data !== null) {
-
-          // delete recipe
-          this.deleteEdamam(cardName);
-          console.log("recipe deleted");
-=======
->>>>>>> ab523f7ceab3049f0cd39145140c12d1060b06b9
 
 
 
@@ -353,8 +333,8 @@ class EdamamSearch extends React.Component {
       <div className="bgImage">
         <Container fluid>
           <Row>
-            <Col size="md-6">
-              <h1 className ="results">Search</h1>
+            <Col size="md-3">
+              <h1>Search</h1>
               <form id="searchForm">
                 <div className="searchForm">
                   <Input
@@ -368,6 +348,7 @@ class EdamamSearch extends React.Component {
                     disabled={!(this.state.queryString)}
                     onClick={this.handleFormSubmit}
                   >
+                    <i className="fas fa-utensils" />
                     Search!
                 </button>
                 </div>
@@ -383,19 +364,15 @@ class EdamamSearch extends React.Component {
                 </div>
               </form>
             </Col>
-<<<<<<< HEAD
-            <Col size="md-6">
-=======
             <Col size="md-9">
 
 
 
 
->>>>>>> ab523f7ceab3049f0cd39145140c12d1060b06b9
               {!this.state.submitBtn ?
-                <h1 className ="results">Search Results</h1>
+                <h1>Search Results</h1>
                 :
-                <h1 className ="results">Your Saved Recipes </h1>
+                <h1>Your Saved Recipes </h1>
               }
 
 
