@@ -49,6 +49,7 @@ ListItem.propTypes = {
   image: PropTypes.string,
   recipeName: PropTypes.string,
   recipeLink: PropTypes.array,
+  recipeIngredients: PropTypes.array,
   showCard: PropTypes.string,
   deleteRecipe: PropTypes.func
 }
