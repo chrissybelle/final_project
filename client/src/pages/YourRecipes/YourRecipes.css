@@ -63,23 +63,7 @@ h1{
     width: 220px;
 }
 
-  .savedRecipes{
-    padding: 25px;
-    background:rgba(29, 29, 29, 0.2);
-    height: auto;
-    display: flex;
-    flex-flow: row wrap;
-    padding: 20px;
-    justify-content: space-around;
-    align-content: flex-start;
-    overflow: hidden;
-    width: auto;
-    /* margin: 0 auto; */
-    margin-left: 50px;
-    margin-top: 150px;
-    /* float: left; */
-    /* display: none; */
-  }
+  
 
   button:hover:before {
 	left: 7px;

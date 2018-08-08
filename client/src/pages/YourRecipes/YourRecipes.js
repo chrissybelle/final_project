@@ -201,7 +201,6 @@ class TestPage extends React.Component {
                     </div>
                 </form>
             </Col>
-            <div className="savedRecipes">
                 {this.state.searchRecipes.length ? (
                     <Col size="md-12 sm-12">
                         {this.state.searchRecipes.map(searchRecipes => {
@@ -217,7 +216,7 @@ class TestPage extends React.Component {
                             );
                         })}
                     </Col>
-                ) : (
+                ) : ( 
                         <Col size="md-12 sm-12">
                             {this.state.recipes.map(recipes => {
                                 return (
@@ -233,7 +232,6 @@ class TestPage extends React.Component {
                             })}
                         </Col>
                     )}
-            </div>
         </div>
     )
 
@@ -244,7 +242,6 @@ class TestPage extends React.Component {
                 <div className="bgImage">
                     <Row>
                         {this.createRecipe()}
-                        {/* {this.favRecipe()} */}
                     </Row>
                 </div>
             )
