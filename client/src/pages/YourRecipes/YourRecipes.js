@@ -57,10 +57,12 @@ class TestPage extends React.Component {
     loadUserRecipes = (user) => {
         API.getRecipesUser(user)
             .then(res =>
-                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", 
-                origin: "",
-                labels: "", 
-                image: "" })
+                this.setState({
+                    recipes: res.data, name: "", ingredients: "", description: "",
+                    origin: "",
+                    labels: "",
+                    image: ""
+                })
             )
             .catch(err => console.log(err));
     }
@@ -138,8 +140,8 @@ class TestPage extends React.Component {
 
 
     createRecipe = () => (
-        <Col size="md-6 sm-12">
-            <form className="recipe">
+        <Col size="md-6 sm-12"><div className="recipe">
+            <form>
                 <Input
                     value={this.state.name}
                     onChange={this.handleInputChange}
@@ -177,8 +179,8 @@ class TestPage extends React.Component {
                     onClick={this.handleFormSubmit}>
                     Submit Recipe </button>
                 {/* </FormBtn> */}
-
             </form>
+        </div>
         </Col>
     );
 
@@ -187,7 +189,7 @@ class TestPage extends React.Component {
     favRecipe = () => (
         <div>
             <Col size="md-6 sm-12">
-                <form id="searchForm">
+                <form>
                     <div className="searchForm">
                         <Input
                             value={this.state.queryString}
@@ -263,7 +265,7 @@ class TestPage extends React.Component {
             );
         else return (
             <div className="bgImage">
-                <div id = "warning"> Please Sign In!</div>
+                <div id="warning"> Please Sign In!</div>
             </div>
         )
     }
