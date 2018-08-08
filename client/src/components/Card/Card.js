@@ -3,6 +3,8 @@ import CardBtn from "../CardBtn";
 import PropTypes from 'prop-types';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./Card.css";
+import { withMultiContext } from "with-context";
+import { AppContext } from '../../components/AppProvider/AppProvider.js';
 
 
 
@@ -16,12 +18,15 @@ class Card extends React.Component {
 
   handleCardBtnClick = (event) => {
     event.preventDefault();
+
+    if (this.props.appContext.user) {
     this.setState(prevState => ({
       btnlike: !prevState.btnlike
     }
 ));
     console.log("LIKE: " + this.state.btnlike); 
   }
+}
 
 
 
@@ -107,4 +112,4 @@ Card.propTypes = {
   //likeTracker: PropTypes.string
 }
 
-export default Card;
+export default withMultiContext({ appContext: AppContext })(Card);

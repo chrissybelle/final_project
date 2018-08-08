@@ -57,7 +57,10 @@ class TestPage extends React.Component {
     loadUserRecipes = (user) => {
         API.getRecipesUser(user)
             .then(res =>
-                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", origin: "", labels: "", image: "" })
+                this.setState({ recipes: res.data, name: "", ingredients: "", description: "", 
+                origin: "",
+                labels: "", 
+                image: "" })
             )
             .catch(err => console.log(err));
     }
@@ -201,7 +204,7 @@ class TestPage extends React.Component {
                     </div>
                 </form>
             </Col>
-            <div className="savedRecipes">
+            <div className="savedRecipes" >
                 {this.state.searchRecipes.length ? (
                     <Col size="md-12 sm-12">
                         {this.state.searchRecipes.map(searchRecipes => {
