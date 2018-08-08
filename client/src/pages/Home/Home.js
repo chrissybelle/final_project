@@ -61,9 +61,9 @@ class Home extends React.Component {
                 <Jumbotron />
                 <body className="Background">
                     <Row>
-                        <Col size="md-2">
+                        <Col size="md-1">
                         </Col>
-                        <Col size="md-8">
+                        <Col size="md-10">
                             <Wrapper showCard={this.state.showCard}>
                                 {cardID.map((results, index) => (
                                     <CardHome

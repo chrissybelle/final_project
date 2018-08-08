@@ -23,6 +23,15 @@
     margin-left: 15px;
   }
 
+  .results{
+    margin-left: 150px;
+    margin-top: 50px;
+    opacity: .8;
+    background-color: rgb(156, 199, 112);
+    border-radius: 25px;
+    width: 300px;
+}
+
 h1{
     font-family: 'EB Garamond', serif;
     font-size: 30px;
