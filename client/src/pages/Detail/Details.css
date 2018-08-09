@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.recipedeets{
+.bgrecipe{
     margin-left: 550px;
     margin-top: 50px;
     opacity: .8;
@@ -30,6 +30,10 @@
     display: flex;
     flex-wrap: nowrap;
 }
+
+.recipedeets{
+    margin-left: 115px;
+    }
 
 .updateRecipe{
     width: 400px;

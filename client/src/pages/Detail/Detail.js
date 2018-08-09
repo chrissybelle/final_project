@@ -58,9 +58,11 @@ class Detail extends React.Component {
     <Container fluid>
       <Row>
         <Col size="md-12">
+        <div className = "bgrecipe">
           <h1 className ="recipedeets">
             {this.state.recipe.name}
           </h1>
+          </div>
         </Col>
       </Row>
       <div className="createdRecipe">
