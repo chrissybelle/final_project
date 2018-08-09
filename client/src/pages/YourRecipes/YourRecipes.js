@@ -217,7 +217,7 @@ class TestPage extends React.Component {
                             </div>
                         </form>
                     </Col>
-                    <Col size="md-6">
+                    <Col size="md-6 sm-12">
                         <h1 className="results">Your Saved Recipes </h1>
                         <div className="resultsWrapper">
                             {this.state.searchRecipes.length ? (
