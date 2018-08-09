@@ -29,3 +29,18 @@ ul{
     border-radius: 25px;
     width: 300px;
 }
+
+.updateRecipe{
+    width: 400px;
+    margin-top: 25px;
+    margin-left: 550px;
+}
+
+.update{
+    margin-left: 600px;
+    margin-top: 50px;
+    opacity: .8;
+    background-color: rgb(156, 199, 112);
+    border-radius: 25px;
+    width: 300px;
+}

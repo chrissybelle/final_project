@@ -113,7 +113,7 @@ class Detail extends React.Component {
     <Container fluid>
       <Row>
         <Col size="md-12">
-          <h1>Update Recipe</h1>
+          <h1 className="update">Update Recipe</h1>
         </Col>
       </Row>
       <Row>
