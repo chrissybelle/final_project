@@ -221,7 +221,7 @@ class TestPage extends React.Component {
                         <h1 className="results">Your Saved Recipes </h1>
                         <div className="resultsWrapper">
                             {this.state.searchRecipes.length ? (
-                                <Col size="md-12">                                    
+                                <Col size="md-6">                                    
                                 {this.state.searchRecipes.map(searchRecipes => {
                                     return (
                                         <SavedCards key={searchRecipes._id}
@@ -236,7 +236,7 @@ class TestPage extends React.Component {
                                 })}
                                 </Col>
                             ) : (
-                                    <Col size="md-12">
+                                    <Col size="md-6">
                                         {this.state.recipes.map(recipes => {
                                             return (
                                                 <SavedCards key={recipes._id}
