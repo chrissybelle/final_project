@@ -21,9 +21,6 @@ export default {
   saveRecipes: function (recipeData) {
     return axios.post("/api/recipes", recipeData);
   },
-  saveRecipesExtension: function (recipeData) {
-    return axios.post("/api/recipes/extension", { params: { recipe: recipeData }});
-  },
   // Gets the recipe with the given id
   getRecipesID: function (id) {
     return axios.get("/api/recipes/" + id);

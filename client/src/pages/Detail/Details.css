@@ -1,13 +1,11 @@
 #foodImage{
     position: absolute;
-    right: 15px;
+    right: 35px;
+    top: 35px;
     height: 300px;
     width: 300px;
 }
 
-ul{
-    position:relative;
-}
 
 .updatebtn{
     background-color: #fad185;
@@ -19,9 +17,10 @@ ul{
     background-color: white;
     height: auto;
     margin: 50px 100px 50px 100px;
+    position: relative;
 }
 
-.recipedeets{
+.bgrecipe{
     margin-left: 550px;
     margin-top: 50px;
     opacity: .8;
@@ -31,6 +30,10 @@ ul{
     display: flex;
     flex-wrap: nowrap;
 }
+
+.recipedeets{
+    margin-left: 115px;
+    }
 
 .updateRecipe{
     width: 400px;

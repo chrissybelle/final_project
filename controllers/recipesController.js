@@ -34,12 +34,7 @@ const recipeFunctions = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  createExtension: function (req, res) {
-    db.Recipe
-      .create(req.query.recipe)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+
   update: function (req, res) {
     db.Recipe
       .findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -58,8 +53,6 @@ const recipeFunctions = {
 router.get("/api/recipes", recipeFunctions.findAll)
 
 router.post("/api/recipes", recipeFunctions.create)
-
-router.post("/api/recipes/extension", recipeFunctions.createExtension)
 
 router.delete("/api/recipes/:id", recipeFunctions.remove)
 

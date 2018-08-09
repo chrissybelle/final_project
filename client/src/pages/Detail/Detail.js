@@ -58,20 +58,23 @@ class Detail extends React.Component {
     <Container fluid>
       <Row>
         <Col size="md-12">
+        <div className = "bgrecipe">
           <h1 className ="recipedeets">
             {this.state.recipe.name}
           </h1>
+          </div>
         </Col>
       </Row>
       <div className="createdRecipe">
       <Row>
-        <Col size="md-10 md-offset-1">
+      <span>
+                <img id="foodImage" alt="food" src={this.state.recipe.image} height="42" width="42" />
+              </span>
+        <Col size="md-8 md-offset-1">
           <article>
             <ul>
               <h1 className = "header">Ingredients</h1>
-              <span>
-                <img id="foodImage" alt="food" src={this.state.recipe.image} height="42" width="42" />
-              </span>
+             
               {this.state.ingredientsList.map(ingredients => (
                 <li> {ingredients} </li>
               ))}
@@ -81,7 +84,7 @@ class Detail extends React.Component {
         </Col>
       </Row>
         <Row>
-          <Col size="md-10 md-offset-1">
+          <Col size="md-8 md-offset-1">
             <article>
             <ul>
                 <h1 className = "header">Description</h1>
