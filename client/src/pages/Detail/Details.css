@@ -21,7 +21,7 @@ ul{
     margin: 50px 100px 50px 100px;
 }
 
-.recipedeets{
+.bgrecipe{
     margin-left: 550px;
     margin-top: 50px;
     opacity: .8;
@@ -31,6 +31,10 @@ ul{
     display: flex;
     flex-wrap: nowrap;
 }
+
+.recipedeets{
+    margin-left: 115px;
+    }
 
 .updateRecipe{
     width: 400px;
