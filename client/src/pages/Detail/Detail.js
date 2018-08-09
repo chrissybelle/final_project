@@ -12,7 +12,7 @@ class Detail extends React.Component {
       recipe: {},
       isUpdate: false,
       ingredientsList: [],
-      descriptionList : [],
+      descriptionList: [],
       i: 0
     };
   }
@@ -20,10 +20,12 @@ class Detail extends React.Component {
   // e.g. localhost:3000/books/599dcb67f0f16317844583fc
   componentDidMount() {
     API.getRecipesID(this.props.match.params.id)
-      .then(res => {this.setState({ recipe: res.data, ingredientsList: res.data.ingredients, descriptionList: res.data.description})
-      
-      console.log(this.state.ingredientsList)}
-    )
+      .then(res => {
+        this.setState({ recipe: res.data, ingredientsList: res.data.ingredients, descriptionList: res.data.description })
+
+        console.log(this.state.ingredientsList)
+      }
+      )
       .catch(err => console.log(err));
   }
 
@@ -67,38 +69,40 @@ class Detail extends React.Component {
             <ul>
               <h1 >Ingredients</h1>
               <span>
-          <img id = "foodImage" alt = "food" src={this.state.recipe.image}  height="42" width="42"/>
-           </span> 
+                <img id="foodImage" alt="food" src={this.state.recipe.image} height="42" width="42" />
+              </span>
               {this.state.ingredientsList.map(ingredients => (
-                <li> {ingredients} </li> 
+                <li> {ingredients} </li>
               ))}
             </ul>
           </article>
-          
+
         </Col>
       </Row>
+      <div className="readrecipe">
+        <Row>
+          <Col size="md-10 md-offset-1">
+            <article>
+              <ul>
+                <h1 >Ingredients</h1>
+                {this.state.descriptionList.map(description => (
+                  <p> {description} </p>
+                ))}
+              </ul>
+            </article>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-10 md-offset-1">
+            <p>
+              Origin: {this.state.recipe.origin}
+            </p>
+
+          </Col>
+        </Row>
+      </div>
       <Row>
-        <Col size="md-10 md-offset-1">
-          <article>
-            <ul>
-              <h1 >Ingredients</h1>
-              {this.state.descriptionList.map(description => (
-                <p> {description} </p> 
-              ))}
-            </ul>
-          </article>
-        </Col>
-      </Row>
-      <Row>
-        <Col size="md-10 md-offset-1">
-        <p>
-          Origin: {this.state.recipe.origin}
-          </p>
-      
-        </Col>
-      </Row>
-      <Row>
-        <button onClick={() => this.handleUpdate(true)}>Update</button>
+        <button className="updatebtn" onClick={() => this.handleUpdate(true)}>Update</button>
 
       </Row>
     </Container>
@@ -113,55 +117,72 @@ class Detail extends React.Component {
       </Row>
       <Row>
         <Col size="md-10 md-offset-1">
-          <form>
-            <Input
-              value={this.state.name}
-              onChange={this.handleInputChange}
-              name="name"
-              defaultValue={this.state.recipe.name}
+          <div className="updateRecipe">
+            <form>
+              <Input
+                value={this.state.name}
+                onChange={this.handleInputChange}
+                name="name"
+                defaultValue={this.state.recipe.name}
 
-            />
-            <TextArea
-              value={this.state.ingredients}
-              onChange={this.handleInputChange}
-              name="ingredients"
-              defaultValue={this.state.recipe.ingredients}
+              />
+              <TextArea
+                value={this.state.ingredients}
+                onChange={this.handleInputChange}
+                name="ingredients"
+                defaultValue={this.state.recipe.ingredients}
 
-            />
-            <TextArea
-              value={this.state.description}
-              onChange={this.handleInputChange}
-              name="description"
-              defaultValue={this.state.recipe.description}
-            />
-             <Input
-                    value={this.state.image}
-                    onChange={this.handleInputChange}
-                    name="image"
-                    placeholder={this.state.recipe.image}
-                />
-                <Input
-                    value={this.state.origin}
-                    onChange={this.handleInputChange}
-                    name="origin"
-                    placeholder={this.state.recipe.origin}
-                />
-            <button onClick={() => this.handleUpdate(false)}>Cancel</button>
-            <FormBtn
-              disabled={!(this.state.recipe.name && this.state.recipe.ingredients && this.state.recipe.description)}
-              onClick={this.handleFormSubmit}
-            >
-              Submit Recipe
-            </FormBtn>
-          </form>
+              />
+              <TextArea
+                value={this.state.description}
+                onChange={this.handleInputChange}
+                name="description"
+                defaultValue={this.state.recipe.description}
+              />
+              <Input
+                value={this.state.image}
+                onChange={this.handleInputChange}
+                name="image"
+                placeholder={this.state.recipe.image}
+              />
+              <Input
+                value={this.state.origin}
+                onChange={this.handleInputChange}
+                name="origin"
+                placeholder={this.state.recipe.origin}
+              />
+              <button className="cancelbtn" onClick={() => this.handleUpdate(false)}>Cancel</button>
+              {/* <FormBtn */}
+              <button className="submitbtn"
+                disabled={!(this.state.recipe.name && this.state.recipe.ingredients && this.state.recipe.description)}
+                onClick={this.handleFormSubmit}
+              >
+                Submit Recipe
+            {/* </FormBtn> */}
+              </button>
+            </form>
+          </div>
         </Col>
       </Row>
     </Container>
   );
 
   render() {
-    if (this.state.isUpdate) return this.getUpdateform();
-    else return this.getReadOnly();
+    if (this.state.isUpdate)
+      return (
+        <div className="bgImage">
+          <Row>
+            {this.getUpdateform()}
+          </Row>
+        </div>
+      )
+    else return (
+      <div className="bgImage">
+        <Row>
+          {this.getReadOnly()}
+        </Row>
+      </div>
+    )
   }
 }
 
