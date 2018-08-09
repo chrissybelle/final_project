@@ -205,6 +205,12 @@ class TestPage extends React.Component {
                             </div>
                             <div className="createrecipe">
                                 <button className="createbtn"
+                                    onClick={() => this.loadUserRecipes(true)}>
+                                    <i className="fas fa-utensils" />
+                                    View All Recipes</button>
+                            </div>
+                            <div className="createrecipe">
+                                <button className="createbtn"
                                     onClick={() => this.handleUpdate(true)}>
                                     <i className="fas fa-utensils" />
                                     Create Recipe</button>
@@ -215,7 +221,8 @@ class TestPage extends React.Component {
                         <h1 className="results">Your Saved Recipes </h1>
                         <div className="resultsWrapper">
                             {this.state.searchRecipes.length ? (
-                                <Col size="md-12">                                    {this.state.searchRecipes.map(searchRecipes => {
+                                <Col size="md-12">                                    
+                                {this.state.searchRecipes.map(searchRecipes => {
                                     return (
                                         <SavedCards key={searchRecipes._id}
                                             recipeLink={"/recipes/" + searchRecipes._id}
