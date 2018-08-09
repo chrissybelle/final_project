@@ -8,3 +8,24 @@
 ul{
     position:relative;
 }
+
+.updatebtn{
+    background-color: #fad185;
+    width: 193px;
+    margin-left: 600px;
+}
+
+.createdRecipe{
+    background-color: white;
+    height: auto;
+    margin: 50px 100px 50px 100px;
+}
+
+.recipedeets{
+    margin-left: 550px;
+    margin-top: 50px;
+    opacity: .8;
+    background-color: rgb(156, 199, 112);
+    border-radius: 25px;
+    width: 300px;
+}

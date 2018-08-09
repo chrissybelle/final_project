@@ -58,11 +58,12 @@ class Detail extends React.Component {
     <Container fluid>
       <Row>
         <Col size="md-12">
-          <h1>
+          <h1 className ="recipedeets">
             {this.state.recipe.name}
           </h1>
         </Col>
       </Row>
+      <div className="createdRecipe">
       <Row>
         <Col size="md-10 md-offset-1">
           <article>
@@ -79,12 +80,11 @@ class Detail extends React.Component {
 
         </Col>
       </Row>
-      <div className="readrecipe">
         <Row>
           <Col size="md-10 md-offset-1">
             <article>
-              <ul>
-                <h1 >Ingredients</h1>
+            <ul>
+                <h1>Description</h1>
                 {this.state.descriptionList.map(description => (
                   <p> {description} </p>
                 ))}
@@ -100,11 +100,12 @@ class Detail extends React.Component {
 
           </Col>
         </Row>
-      </div>
+        </div>
       <Row>
-        <button className="updatebtn" onClick={() => this.handleUpdate(true)}>Update</button>
+        <button className="updatebtn" onClick={() => this.handleUpdate(true)}><i className="fas fa-utensils" />Update</button>
 
       </Row>
+      
     </Container>
   );
 
