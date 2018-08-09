@@ -21,18 +21,19 @@
 }
 
 .bgrecipe{
-    margin-left: 550px;
+    margin-left: 100px;
     margin-top: 50px;
+    margin-right: 100px;
     opacity: .8;
     background-color: rgb(156, 199, 112);
     border-radius: 25px;
-    width: 300px;
+    width: auto;
     display: flex;
     flex-wrap: nowrap;
 }
 
 .recipedeets{
-    margin-left: 115px;
+    margin-left: auto;
     }
 
 .updateRecipe{
