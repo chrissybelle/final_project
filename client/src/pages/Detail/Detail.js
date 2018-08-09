@@ -68,7 +68,7 @@ class Detail extends React.Component {
         <Col size="md-10 md-offset-1">
           <article>
             <ul>
-              <h1 >Ingredients</h1>
+              <h1 className = "header">Ingredients</h1>
               <span>
                 <img id="foodImage" alt="food" src={this.state.recipe.image} height="42" width="42" />
               </span>
@@ -84,7 +84,7 @@ class Detail extends React.Component {
           <Col size="md-10 md-offset-1">
             <article>
             <ul>
-                <h1>Description</h1>
+                <h1 className = "header">Description</h1>
                 {this.state.descriptionList.map(description => (
                   <p> {description} </p>
                 ))}
@@ -94,7 +94,7 @@ class Detail extends React.Component {
         </Row>
         <Row>
           <Col size="md-10 md-offset-1">
-            <p>
+            <p className="origin">
               Origin: {this.state.recipe.origin}
             </p>
 
