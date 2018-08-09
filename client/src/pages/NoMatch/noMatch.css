@@ -1,0 +1,14 @@
+.bgImage {
+    background-image: url("../../imgs/resize.jpg");
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-size: 100% 100%;
+    overflow: auto;
+    min-height: 700px;
+    min-width: 1500px;
+}
+
+.text{
+    margin: auto;
+    margin-top: 300px;
+}
