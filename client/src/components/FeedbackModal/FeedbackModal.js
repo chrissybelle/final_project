@@ -45,7 +45,7 @@ console.log("close");
                                     <p id="modalBody" className="modalFont">Please log in to start creating your recipe collection!</p>
                                 </div>
                                 <div className="modal-footer">
-                                    <button id="closeModal" type="button" className="btn btn-primary" data-dismiss="modal"><a href="/home">Close</a></button>
+                                    <button id="edamamModal" type="button" className="btn btn-primary" data-dismiss="modal"><a id="closeModal" href="/edamam">Close</a></button>
                                 </div>
                             </div>
                         </div>
